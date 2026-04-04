@@ -33,13 +33,23 @@ export function ThemeToggle({
   resolvedThemeLabels,
   options,
 }: ThemeToggleProps) {
+  const activeOption = options.find((option) => option.value === mode);
+
   return (
-    <div className="flex min-w-[16rem] flex-col gap-2" aria-label={title}>
-      <div className="flex items-center justify-between gap-4">
-        <span className="kicker">{title}</span>
-        <span className="mono-label text-text-secondary">
-          {activeLabel}: {resolvedThemeLabels[resolvedTheme]}
-        </span>
+    <div className="chrome-control-shell flex min-w-[16rem] flex-col gap-3" aria-label={title}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <span className="kicker">{title}</span>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <span className="passport-tag border-border-strong bg-elevated text-text-primary">
+              {resolvedThemeLabels[resolvedTheme]}
+            </span>
+            <span className="mono-label text-text-secondary">
+              {activeLabel}: {resolvedThemeLabels[resolvedTheme]}
+            </span>
+          </div>
+        </div>
+        <span className="status-chip">{activeOption?.label}</span>
       </div>
       <div
         role="group"

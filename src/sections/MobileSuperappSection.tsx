@@ -39,39 +39,45 @@ export function MobileSuperappSection() {
             bodyClassName="flex justify-center"
           >
             <div className="phone-frame">
-              <div className="phone-topline">
-                <StatusLamp tone="success" />
-                <span className="mono-label text-text-secondary">{mobile.frame.stableChannel}</span>
-                <span className="mono-label text-text-secondary">{mobile.frame.time}</span>
-              </div>
-              <div className="phone-status-rack">
-                <span className="passport-tag">{mobile.frame.controlLabel}</span>
-                <span className="passport-tag">{mobile.frame.dockLabel}</span>
-              </div>
-              <div className="mt-3 space-y-3">
-                <div className="phone-module phone-module-head">
-                  <p className="text-sm font-medium text-text-primary">{screen.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-text-secondary">{screen.subtitle}</p>
+              <div className="phone-inner-frame">
+                <div className="phone-topline">
+                  <StatusLamp tone="success" />
+                  <span className="mono-label text-text-secondary">{mobile.frame.stableChannel}</span>
+                  <span className="mono-label text-text-secondary">{mobile.frame.time}</span>
                 </div>
-                <div className="space-y-2.5">
-                  {screen.modules.map((module) => (
-                    <div key={module.id} className="phone-module">
-                      <div className="flex items-center justify-between gap-3">
-                        <p className="mono-label text-text-secondary">{module.label}</p>
-                        <ToneBadge tone={module.tone} className="px-2.5 py-1.5 text-[0.68rem]">
-                          {common.toneLabels[module.tone]}
-                        </ToneBadge>
+                <div className="phone-system-band">
+                  <span className="mono-label text-text-secondary">{mobile.panelMeta}</span>
+                  <span className="mono-label text-text-secondary">{screen.subtitle}</span>
+                </div>
+                <div className="phone-status-rack">
+                  <span className="passport-tag">{mobile.frame.controlLabel}</span>
+                  <span className="passport-tag">{mobile.frame.dockLabel}</span>
+                </div>
+                <div className="mt-3 space-y-3">
+                  <div className="phone-module phone-module-head">
+                    <p className="text-sm font-medium text-text-primary">{screen.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-text-secondary">{screen.subtitle}</p>
+                  </div>
+                  <div className="space-y-2.5">
+                    {screen.modules.map((module) => (
+                      <div key={module.id} className="phone-module">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="mono-label text-text-secondary">{module.label}</p>
+                          <ToneBadge tone={module.tone} className="px-2.5 py-1.5 text-[0.68rem]">
+                            {common.toneLabels[module.tone]}
+                          </ToneBadge>
+                        </div>
+                        <p className="mt-2.5 text-base font-semibold text-text-primary">{module.value}</p>
                       </div>
-                      <p className="mt-2.5 text-base font-semibold text-text-primary">{module.value}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <div className="phone-module phone-module-note">
+                    <p className="text-sm leading-6 text-text-secondary">{screen.footer}</p>
+                  </div>
                 </div>
-                <div className="phone-module phone-module-note">
-                  <p className="text-sm leading-6 text-text-secondary">{screen.footer}</p>
+                <div className="phone-dock mt-3">
+                  <span className="phone-dock-indicator" />
                 </div>
-              </div>
-              <div className="phone-dock mt-3">
-                <span className="phone-dock-indicator" />
               </div>
             </div>
           </Panel>

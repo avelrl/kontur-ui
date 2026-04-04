@@ -56,7 +56,11 @@ function applyLocaleToRoot(locale: Locale) {
 }
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => readStoredLocale());
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    const initialLocale = readStoredLocale();
+    applyLocaleToRoot(initialLocale);
+    return initialLocale;
+  });
 
   const syncLocale = useEffectEvent((nextLocale: Locale) => {
     applyLocaleToRoot(nextLocale);

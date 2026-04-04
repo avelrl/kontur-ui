@@ -28,6 +28,9 @@ const ruDictionary = {
       title: "Язык интерфейса",
       activeLabel: "Активно",
       groupAriaLabel: "Переключатель языка",
+      rootLangLabel: "HTML lang",
+      storageLabel: "Хранение",
+      storageValue: "localStorage",
       options: [
         { value: "ru", label: "RU", fullLabel: "Русский" },
         { value: "en", label: "EN", fullLabel: "English" },
@@ -132,6 +135,12 @@ const ruDictionary = {
         description:
           "Foundations задают не только цвета, но и поведение поверхности: как различаются canvas, panel, elevated и field, как работают рамка, радиус, тень и spacing rhythm, и почему тёмная тема ощущается самостоятельной приборной версией, а не инверсией светлой.",
         sideTitle: "Surface hierarchy",
+        calibrationTitle: "Калибровка слоёв",
+        calibrationItems: [
+          "Canvas удерживает общий воздух, сетку и фон рабочего контура.",
+          "Panel собирает секцию в один модуль и не распадается на карточки.",
+          "Elevated и field различаются функцией: акцент против рабочего носителя данных.",
+        ],
         surfaceLayers: [
           {
             id: "canvas",
@@ -271,6 +280,12 @@ const ruDictionary = {
         eyebrow: "Конструкция",
         title: "Радиусы, бордеры, тени и spacing rhythm",
         meta: "SHAPE / RHYTHM",
+        layerNoteTitle: "Служебная памятка",
+        layerNoteItems: [
+          "Рамка формирует модуль раньше, чем тень добавляет глубину.",
+          "Тень только отделяет слой и не должна делать тему мягкой или showroom-похожей.",
+          "Шаги ритма остаются кратными 8 и не расползаются случайными зазорами.",
+        ],
         tokens: [
           {
             id: "panel-radius",
@@ -313,6 +328,12 @@ const ruDictionary = {
         panelLabel: "Panel",
         elevatedLabel: "Elevated",
         fieldLabel: "Field",
+        notesTitle: "Layer note",
+        notes: [
+          "Canvas остаётся читаемой подложкой, а не пустым бежевым фоном.",
+          "Panel держит секцию как приборный модуль и не уступает место случайным карточкам.",
+          "Field обязан выглядеть управляемой рабочей поверхностью, а не мягкой подложкой для текста.",
+        ],
         description:
           "Каждый слой отличается не только цветом, но и функцией: panel удерживает модуль, elevated акцентирует служебную зону, field оформляет управляемый элемент или метку состояния.",
       },
@@ -607,6 +628,11 @@ const ruDictionary = {
         description:
           "Data-display строится не как витрина KPI, а как система чтения состояния: аналитические блоки показывают динамику, шкалы фиксируют степень готовности, системные карточки удерживают статус контура, а реестры и таблицы показывают, что нужно делать дальше.",
         patternsTitle: "State patterns",
+        registryNoteTitle: "Служебная памятка",
+        registryNoteLines: [
+          "Аналитика фиксирует движение, но не заменяет реестр и маршрут действия.",
+          "Каждая зона должна либо держать состояние, либо объяснять, что требуется дальше.",
+        ],
       },
       analytics: {
         eyebrow: "Аналитические блоки",
@@ -724,6 +750,38 @@ const ruDictionary = {
         meta: "REGISTRY / ACTIONS",
         introText: "В таблице у каждой строки есть состояние, канал и следующее действие.",
         caption: "Операционный реестр модулей",
+        stateKeyTitle: "Ключ состояний",
+        stateKeyItems: [
+          {
+            id: "success",
+            label: "Штатно",
+            text: "Выпуск или публикация разрешены без дополнительной остановки.",
+            tone: "success" as StatusTone,
+          },
+          {
+            id: "service",
+            label: "Наблюдение",
+            text: "Маршрут уточняется, но модуль не выпадает из рабочего контура.",
+            tone: "service" as StatusTone,
+          },
+          {
+            id: "warning",
+            label: "Требует подтверждения",
+            text: "Нужна ручная сверка, допуск или подтверждение происхождения.",
+            tone: "warning" as StatusTone,
+          },
+          {
+            id: "danger",
+            label: "Нарушение контура",
+            text: "Модуль переводится на резерв или удерживается до восстановления канала.",
+            tone: "danger" as StatusTone,
+          },
+        ],
+        serviceMemoTitle: "Service memo",
+        serviceMemoLines: [
+          "Операционный реестр обязан удерживать состояние, ответственного и следующее действие в одной строке.",
+          "Свободный воздух допустим только как запас сканирования, а не как пустая плоскость без функции.",
+        ],
         columns: {
           code: "Код",
           module: "Модуль",
@@ -966,11 +1024,23 @@ const ruDictionary = {
         noteTitle: "Короткая памятка",
         noteText:
           "Сначала token, потом mapping, потом компонент. Не наоборот. Никаких raw hex, брендовых акцентов и рекламных слоганов внутри UI.",
+        checklistTitle: "Контроль перед выпуском",
+        checklistItems: [
+          "Проверить light и dark как две самостоятельные версии одной системы.",
+          "Убедиться, что RU и EN не ломают шапки, таблицы и mobile preview.",
+          "Сохранить служебный тон без product-copy и без startup-речи.",
+        ],
       },
       tokenFlow: {
         eyebrow: "Поток токенов",
         title: "Как добавить новый semantic token",
         meta: "TOKENS / FLOW",
+        verificationTitle: "Verification registry",
+        verificationItems: [
+          "Новый токен имеет light-значение и отдельный dark override.",
+          "Компонент использует только semantic class names.",
+          "Разница между поверхностями читается без грубых теней и рекламного контраста.",
+        ],
         steps: [
           "Добавить `--sys-*` переменную в `:root` и соответствующий dark override.",
           "Промаппить её в `@theme inline`, если нужен utility token.",
@@ -1061,6 +1131,9 @@ const enDictionary: LocaleDictionary = {
       title: "Interface language",
       activeLabel: "Active",
       groupAriaLabel: "Language switcher",
+      rootLangLabel: "HTML lang",
+      storageLabel: "Storage",
+      storageValue: "localStorage",
       options: [
         { value: "ru", label: "RU", fullLabel: "Russian" },
         { value: "en", label: "EN", fullLabel: "English" },
@@ -1165,6 +1238,12 @@ const enDictionary: LocaleDictionary = {
         description:
           "Foundations defines not only colors but surface behavior: how canvas, panel, elevated, and field differ, how border, radius, shadow, and spacing rhythm operate, and why the dark theme feels like an independent instrument version rather than an inversion of the light one.",
         sideTitle: "Surface hierarchy",
+        calibrationTitle: "Layer calibration",
+        calibrationItems: [
+          "Canvas holds the shared air, grid, and working-contour background.",
+          "Panel gathers a section into one module instead of breaking it into cards.",
+          "Elevated and field differ by function: accent surface versus working data carrier.",
+        ],
         surfaceLayers: [
           {
             id: "canvas",
@@ -1304,6 +1383,12 @@ const enDictionary: LocaleDictionary = {
         eyebrow: "Construction",
         title: "Radii, borders, shadows, and spacing rhythm",
         meta: "SHAPE / RHYTHM",
+        layerNoteTitle: "Service memo",
+        layerNoteItems: [
+          "The border forms the module before the shadow adds depth.",
+          "Shadow only separates the layer and should not make the theme soft or showroom-like.",
+          "Rhythm steps stay divisible by 8 and do not spread into arbitrary gaps.",
+        ],
         tokens: [
           {
             id: "panel-radius",
@@ -1346,6 +1431,12 @@ const enDictionary: LocaleDictionary = {
         panelLabel: "Panel",
         elevatedLabel: "Elevated",
         fieldLabel: "Field",
+        notesTitle: "Layer note",
+        notes: [
+          "Canvas stays a legible substrate rather than an empty beige background.",
+          "Panel holds the section as an instrument module and does not yield to random cards.",
+          "Field must read as a controlled working surface rather than a soft text backing.",
+        ],
         description:
           "Each layer differs not only by color but by function: panel holds a module, elevated emphasizes a service zone, and field frames a controllable element or state mark.",
       },
@@ -1640,6 +1731,11 @@ const enDictionary: LocaleDictionary = {
         description:
           "Data display is built not as a KPI showcase but as a state-reading system: analytical blocks show movement, scales record readiness, system cards hold contour status, and registries and tables show what should happen next.",
         patternsTitle: "State patterns",
+        registryNoteTitle: "Service memo",
+        registryNoteLines: [
+          "Analytics records movement but does not replace the registry or the action route.",
+          "Each zone should either hold a state or explain what must happen next.",
+        ],
       },
       analytics: {
         eyebrow: "Analytical blocks",
@@ -1757,6 +1853,38 @@ const enDictionary: LocaleDictionary = {
         meta: "REGISTRY / ACTIONS",
         introText: "Each row in the table carries state, channel, and next action.",
         caption: "Operational module registry",
+        stateKeyTitle: "State key",
+        stateKeyItems: [
+          {
+            id: "success",
+            label: "Nominal",
+            text: "Release or publication is allowed without an additional stop.",
+            tone: "success" as StatusTone,
+          },
+          {
+            id: "service",
+            label: "Observation",
+            text: "The route is being clarified, but the module remains in the working contour.",
+            tone: "service" as StatusTone,
+          },
+          {
+            id: "warning",
+            label: "Confirmation required",
+            text: "Manual reconciliation, admission, or origin confirmation is required.",
+            tone: "warning" as StatusTone,
+          },
+          {
+            id: "danger",
+            label: "Contour breach",
+            text: "The module moves to reserve or is held until the channel is restored.",
+            tone: "danger" as StatusTone,
+          },
+        ],
+        serviceMemoTitle: "Service memo",
+        serviceMemoLines: [
+          "An operational registry must keep state, responsible party, and next action within one row.",
+          "Open air is acceptable only as scanning reserve, not as an uninhabited plane without function.",
+        ],
         columns: {
           code: "Code",
           module: "Module",
@@ -1999,11 +2127,23 @@ const enDictionary: LocaleDictionary = {
         noteTitle: "Short note",
         noteText:
           "Token first, mapping second, component third. Not the other way around. No raw hex values, branded accents, or advertising slogans inside the UI.",
+        checklistTitle: "Release check",
+        checklistItems: [
+          "Verify light and dark as two independent versions of the same system.",
+          "Make sure RU and EN do not break headers, tables, or the mobile preview.",
+          "Keep the service tone free of product copy and startup phrasing.",
+        ],
       },
       tokenFlow: {
         eyebrow: "Token flow",
         title: "How to add a new semantic token",
         meta: "TOKENS / FLOW",
+        verificationTitle: "Verification registry",
+        verificationItems: [
+          "The new token has a light value and a dedicated dark override.",
+          "The component uses semantic class names only.",
+          "Surface differences are visible without aggressive shadows or promotional contrast.",
+        ],
         steps: [
           "Add a `--sys-*` variable to `:root` and the matching dark override.",
           "Map it inside `@theme inline` if a utility token is needed.",

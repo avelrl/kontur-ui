@@ -15,19 +15,31 @@ export function FoundationsSection() {
         eyebrow={foundations.intro.eyebrow}
         title={foundations.intro.title}
         meta={foundations.intro.meta}
-        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]"
+        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.14fr)_minmax(19rem,0.86fr)]"
       >
         <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{foundations.intro.description}</p>
-        <div className="surface-field px-4 py-4">
-          <p className="mono-label text-text-secondary">{foundations.intro.sideTitle}</p>
-          <div className="mt-3 space-y-3">
-            {foundations.intro.surfaceLayers.map((layer) => (
-              <div key={layer.id} className="surface-elevated px-3 py-3">
-                <p className="text-sm font-medium text-text-primary">{layer.label}</p>
-                <p className="mt-1 mono-label text-text-secondary">{layer.token}</p>
-                <p className="mt-2 text-sm leading-6 text-text-secondary">{layer.description}</p>
-              </div>
-            ))}
+        <div className="grid gap-3">
+          <div className="surface-field px-4 py-4">
+            <p className="mono-label text-text-secondary">{foundations.intro.sideTitle}</p>
+            <div className="mt-3 space-y-3">
+              {foundations.intro.surfaceLayers.map((layer) => (
+                <div key={layer.id} className="surface-elevated px-3 py-3">
+                  <p className="text-sm font-medium text-text-primary">{layer.label}</p>
+                  <p className="mt-1 mono-label text-text-secondary">{layer.token}</p>
+                  <p className="mt-2 text-sm leading-6 text-text-secondary">{layer.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{foundations.intro.calibrationTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {foundations.intro.calibrationItems.map((item) => (
+                <p key={item} className="text-sm leading-6 text-text-secondary">
+                  {item}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </Panel>
@@ -130,6 +142,16 @@ export function FoundationsSection() {
               ))}
             </div>
           </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{foundations.structure.layerNoteTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {foundations.structure.layerNoteItems.map((item) => (
+                <p key={item} className="text-sm leading-6 text-text-secondary">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
         </Panel>
 
         <Panel
@@ -137,7 +159,7 @@ export function FoundationsSection() {
           eyebrow={foundations.hierarchy.eyebrow}
           title={foundations.hierarchy.title}
           meta={foundations.hierarchy.meta}
-          bodyClassName="space-y-4"
+          bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.04fr)_minmax(18rem,0.96fr)]"
         >
           <div className="rounded-panel border border-border-strong bg-canvas p-4 shadow-panel">
             <div className="graphic-divider" />
@@ -150,6 +172,16 @@ export function FoundationsSection() {
                   <p className="mt-2 text-sm leading-6 text-text-primary">{foundations.hierarchy.description}</p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{foundations.hierarchy.notesTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {foundations.hierarchy.notes.map((item) => (
+                <p key={item} className="text-sm leading-6 text-text-secondary">
+                  {item}
+                </p>
+              ))}
             </div>
           </div>
         </Panel>

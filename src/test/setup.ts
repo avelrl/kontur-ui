@@ -7,6 +7,6 @@ afterEach(() => {
   window.localStorage.clear();
   document.documentElement.removeAttribute("data-theme");
   document.documentElement.removeAttribute("data-theme-mode");
+  document.documentElement.removeAttribute("lang");
   document.documentElement.style.colorScheme = "";
 });
-

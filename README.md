@@ -1,77 +1,135 @@
-# Контур UI
+# Kontur UI
 
-Демонстрационный проект на `Vite + React + TypeScript + Tailwind CSS v4` с полной темой `Контур`.
+[English](./README.md) | [Русский](./README.ru.md)
 
-Сейчас в репозитории реализованы:
+`Kontur UI` is a public demo and reference repository built with `Vite`, `React`, `TypeScript`, and `Tailwind CSS v4`.
 
-- semantic theme tokens для light/dark
-- `light / dark / system` переключение без заметного theme flash
-- верхняя статусная строка и навигация по секциям
-- системная статусная грамматика:
-  - `StatusLamp` как вторичный приборный сигнал
-  - `ToneBadge` как основной читаемый статус для журналов, таблиц и реестров
-- foundations-секция: палитра, surface hierarchy, типографика, радиусы, бордеры, тени, spacing rhythm
-- расширенная библиотека компонентов: кнопки, формы, tabs, badges, indicators, alerts, empty/loading/error states, search/filter/command patterns
-- data-display секции: журналы, реестры, аналитические блоки, шкалы, системные карточки состояния и документационные модули
-- grammar of section chrome: секционные шапки, индексные подписи, паспортные ярлыки, служебные маркировки, графические делители
-- layout patterns: dashboard, archive/docs, settings/system
-- mobile superapp preview
-- секция документации по теме с iconography rules и content tone rules
+It presents a complete interface language for dense operational products: registries, logs, document-like blocks, section grammar, state markers, and carefully separated light and dark surfaces. The goal is not to ship a neutral dashboard kit. The goal is to document a specific visual system and show how it can be implemented in code.
 
-## Запуск
+![Kontur UI overview](./docs/readme-overview.png)
+
+## What This Repository Is
+
+- A reference implementation of the `Kontur` theme.
+- A runnable demo of tokens, sections, chrome patterns, and data-heavy screens.
+- A codebase that shows how theme switching, locale switching, and semantic styling can work together.
+- A starting point for teams exploring calm, service-oriented, engineering-documentary interfaces.
+
+## Why It Exists
+
+Many examples of internal tooling drift toward the same few aesthetics:
+
+- fintech dashboard
+- SaaS admin panel
+- startup product UI
+- generic documentation site
+
+`Kontur UI` exists to show a different direction: a mature working surface built around state reading, records, archives, and control grammar instead of marketing rhythms and floating card grids.
+
+## What It Solves
+
+- Shows how to build a non-generic operational theme with a stable visual identity.
+- Keeps theme foundations in semantic CSS variables instead of scattering raw colors across components.
+- Supports `light`, `dark`, and `system` modes without visible theme flash.
+- Makes `RU / EN` switching visible in the interface and persistent in storage.
+- Demonstrates data-first composition with logs, registries, tables, module passports, and service notes.
+- Documents how to extend the theme without losing its tone, hierarchy, or section grammar.
+
+## What It Does Not Solve
+
+- It is not a production-ready design system package.
+- It is not a universal component library for arbitrary product styles.
+- It is not an application with real backend workflows or domain logic.
+- It is not a UI kit for landing pages, marketing sites, or consumer mobile apps.
+- It is not published as a versioned npm package and does not promise API stability.
+
+## Who Should Use It
+
+- Designers exploring data-heavy interfaces outside standard SaaS conventions.
+- Frontend engineers who want a concrete semantic-theming reference.
+- Teams building archival, registry-based, documentary, or control-room-like products.
+
+If you need a neutral base for many brands and many tone-of-voice directions, this repository is probably the wrong starting point.
+
+## How To Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Проверка:
+## How To Verify
 
 ```bash
-npm run test
+npm test
 npm run build
 ```
 
-## Где менять токены
+## How To Use It
 
-Все токены темы лежат в `src/styles/app.css`:
+- Open the demo and inspect the sections as a reference implementation.
+- Reuse semantic tokens from [`src/styles/app.css`](./src/styles/app.css).
+- Reuse structural patterns from [`src/components/`](./src/components) and [`src/sections/`](./src/sections).
+- Adapt the copy, tokens, and modules to your own product while preserving the semantic layer.
 
-- `:root` содержит light semantic variables
-- `[data-theme="dark"]` содержит dark overrides
-- `@theme inline` маппит `--sys-*` в Tailwind v4 utility tokens `--color-*`, `--radius-*`, `--shadow-*`, `--font-*`
+## Repository Structure
 
-Компоненты используют только семантические utility-классы вроде `bg-panel`, `text-text-primary`, `border-border-strong`, `shadow-panel`, `rounded-panel`.
+```text
+.
+├── index.html
+├── package.json
+├── src
+│   ├── components/
+│   ├── data/
+│   ├── lib/
+│   ├── sections/
+│   └── styles/app.css
+└── README.md
+```
 
-## Архитектура
+## Theme Architecture
 
-- `src/lib/theme.ts` содержит runtime-логику темы и storage/media helpers.
-- `src/data/demo.ts` хранит служебный copy, foundations data, registry patterns, mobile preview и documentation rules.
-- `src/components/ui/Panel.tsx` задаёт базовый модульный контейнер и теперь прокидывает `id` в корневой DOM-элемент для якорной навигации и element-level screenshots.
-- `src/components/ui/Button.tsx`, `src/components/ui/IconButton.tsx`, `src/components/ui/SegmentedControl.tsx`, `src/components/ui/Tabs.tsx`, `src/components/ui/Accordion.tsx`, `src/components/ui/ToneBadge.tsx`, `src/components/ui/StatusLamp.tsx` закрывают основные интерактивные и статусные паттерны.
-- `src/components/chrome/TopStatusBar.tsx`, `src/components/chrome/PassportBlock.tsx`, `src/components/chrome/OperationalLog.tsx`, `src/components/chrome/DataTable.tsx` формируют первичный язык системы.
-- `src/sections/` содержит полный demo flow: foundations, components, data display, section chrome, полноразмерные layout screens, mobile preview и docs.
+### Semantic tokens
 
-## Как добавлять новые компоненты в стиле темы
+Theme tokens live in [`src/styles/app.css`](./src/styles/app.css):
 
-1. Добавить недостающий semantic token в `src/styles/app.css` сначала в light и dark runtime-переменные.
-2. При необходимости промаппить его в `@theme inline`, если он нужен как Tailwind utility token.
-3. Собрать новый компонент поверх `Panel` или рядом с ним, не используя raw hex и декоративные тени.
-4. Проверять, что компонент читается как часть архивно-приборной среды: через рамку, плотную сетку, статусный язык и служебную типографику.
-5. Если добавляется новый модульный паттерн, зафиксировать его grammar: section header, passport tags, state markers, divider logic.
+- `:root` contains light-theme semantic variables
+- `[data-theme="dark"]` contains dark-theme overrides
+- `@theme inline` maps `--sys-*` variables to Tailwind v4 utility tokens
 
-## Статусная система
+Components use semantic classes such as `bg-panel`, `text-text-primary`, and `border-border-strong` instead of raw hex values.
 
-- `src/components/ui/StatusLamp.tsx` использовать только как вторичный сигнал рядом с уже понятным текстом: в summary, top status bar, compact device-like indicators.
-- `src/components/ui/ToneBadge.tsx` использовать там, где статус должен читаться автономно: в журналах, таблицах, реестрах, списках действий и settings-блоках.
-- Не смешивать `StatusLamp` и `ToneBadge` как взаимозаменяемые паттерны внутри одного контекста данных.
+### Runtime logic
 
-## Проверка
+- [`src/lib/theme.ts`](./src/lib/theme.ts) handles theme mode, storage, system preference, and root attributes.
+- [`src/lib/locale.tsx`](./src/lib/locale.tsx) handles locale state, persistence, and `html[lang]`.
+- [`src/data/locale.ts`](./src/data/locale.ts) stores localized UI copy for `ru` and `en`.
 
-- `npm test`
-- `npm run build`
-- browser smoke использовался для проверки theme toggle, tabs, accordion, segmented control и якорной навигации
+### Visual grammar
 
-## Документация по теме
+- [`src/components/chrome/`](./src/components/chrome) contains the top status bar, logs, tables, and other chrome patterns.
+- [`src/components/ui/`](./src/components/ui) contains reusable UI primitives.
+- [`src/sections/`](./src/sections) contains the full demo flow: overview, foundations, components, data display, section grammar, layouts, mobile preview, and docs.
 
-- token flow, iconography rules и content tone rules собраны в `src/sections/ThemeDocsSection.tsx`
-- правила визуальной грамматики секций собраны в `src/sections/SectionChromeSection.tsx`
+## Extending The Theme
+
+When adding a new module:
+
+1. Add or adjust semantic tokens in [`src/styles/app.css`](./src/styles/app.css).
+2. Map new tokens in `@theme inline` only when a Tailwind utility token is actually needed.
+3. Build the module from semantic surfaces, borders, labels, and spacing rhythm.
+4. Verify light and dark as two independent versions of one system.
+5. Check that the result still reads as a calm operational interface rather than SaaS, fintech, or marketing UI.
+
+## Public Repository Notes
+
+- The repository is intended for public GitHub publication.
+- `package.json` keeps `"private": true` on purpose to prevent accidental npm publishing. This does not block GitHub publication.
+- Generated artifacts are ignored through `.gitignore`.
+- The included `MIT` license allows reuse with attribution.
+
+## Public Readiness
+
+The repository is in good shape for public GitHub publication: it has a permissive license, a runnable app, tests, and a working build pipeline.
+
+The main remaining question is repository scope, not safety. If you want a cleaner public tree, keep only public-facing documentation and remove internal working notes.

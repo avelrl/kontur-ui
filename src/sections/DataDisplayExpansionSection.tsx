@@ -29,16 +29,28 @@ export function DataDisplayExpansionSection() {
         eyebrow={dataDisplay.intro.eyebrow}
         title={dataDisplay.intro.title}
         meta={dataDisplay.intro.meta}
-        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]"
+        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.12fr)_minmax(19rem,0.88fr)]"
       >
         <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{dataDisplay.intro.description}</p>
-        <div className="surface-field px-4 py-4">
-          <p className="mono-label text-text-secondary">{dataDisplay.intro.patternsTitle}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <ToneBadge tone="success">{common.toneLabels.success}</ToneBadge>
-            <ToneBadge tone="service">{common.toneLabels.service}</ToneBadge>
-            <ToneBadge tone="warning">{common.toneLabels.warning}</ToneBadge>
-            <ToneBadge tone="danger">{common.toneLabels.danger}</ToneBadge>
+        <div className="grid gap-3">
+          <div className="surface-field px-4 py-4">
+            <p className="mono-label text-text-secondary">{dataDisplay.intro.patternsTitle}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <ToneBadge tone="success">{common.toneLabels.success}</ToneBadge>
+              <ToneBadge tone="service">{common.toneLabels.service}</ToneBadge>
+              <ToneBadge tone="warning">{common.toneLabels.warning}</ToneBadge>
+              <ToneBadge tone="danger">{common.toneLabels.danger}</ToneBadge>
+            </div>
+          </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{dataDisplay.intro.registryNoteTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {dataDisplay.intro.registryNoteLines.map((line) => (
+                <p key={line} className="text-sm leading-6 text-text-secondary">
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </Panel>
@@ -137,6 +149,33 @@ export function DataDisplayExpansionSection() {
           title={dataDisplay.registryTable.title}
           meta={dataDisplay.registryTable.meta}
           bodyClassName="space-y-4 px-0 py-0"
+          footer={
+            <div className="grid gap-4 xl:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)]">
+              <div className="surface-field px-4 py-4">
+                <p className="mono-label text-text-secondary">{dataDisplay.registryTable.stateKeyTitle}</p>
+                <div className="mt-3 space-y-3">
+                  {dataDisplay.registryTable.stateKeyItems.map((item) => (
+                    <div key={item.id} className="rounded-control border border-border-soft bg-canvas px-3 py-3">
+                      <ToneBadge tone={item.tone} className="px-2.5 py-1.5 text-[0.68rem]">
+                        {item.label}
+                      </ToneBadge>
+                      <p className="mt-2 text-sm leading-6 text-text-secondary">{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="surface-inset px-4 py-4">
+                <p className="mono-label text-text-secondary">{dataDisplay.registryTable.serviceMemoTitle}</p>
+                <div className="mt-3 space-y-2.5">
+                  {dataDisplay.registryTable.serviceMemoLines.map((line) => (
+                    <p key={line} className="text-sm leading-6 text-text-secondary">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          }
         >
           <div className="flex items-center justify-between gap-3 border-b border-border-soft px-4 py-3 md:px-5">
             <div className="flex items-center gap-2">

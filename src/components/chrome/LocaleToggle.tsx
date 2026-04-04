@@ -7,6 +7,9 @@ type LocaleToggleProps = {
   title: string;
   activeLabel: string;
   groupAriaLabel: string;
+  rootLangLabel: string;
+  storageLabel: string;
+  storageValue: string;
   options: Array<{
     value: Locale;
     label: string;
@@ -20,22 +23,31 @@ export function LocaleToggle({
   title,
   activeLabel,
   groupAriaLabel,
+  rootLangLabel,
+  storageLabel,
+  storageValue,
   options,
 }: LocaleToggleProps) {
   const activeOption = options.find((option) => option.value === locale);
 
   return (
-    <div className="flex min-w-[10.5rem] flex-col gap-2" aria-label={title}>
-      <div className="flex items-center justify-between gap-4">
-        <span className="kicker">{title}</span>
-        <span className="mono-label text-text-secondary">
-          {activeLabel}: {activeOption?.label}
-        </span>
+    <div className="chrome-control-shell flex min-w-[14rem] flex-col gap-3" aria-label={title}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <span className="kicker">{title}</span>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <span className="passport-tag border-border-strong bg-active-module text-text-primary">RU / EN</span>
+            <span className="mono-label text-text-secondary">
+              {activeLabel}: {activeOption?.fullLabel}
+            </span>
+          </div>
+        </div>
+        <span className="status-chip">{activeOption?.label}</span>
       </div>
       <div
         role="group"
         aria-label={groupAriaLabel}
-        className="control-group inline-flex p-1"
+        className="control-group grid grid-cols-2 p-1"
       >
         {options.map((option) => {
           const isActive = option.value === locale;
@@ -60,6 +72,16 @@ export function LocaleToggle({
           );
         })}
       </div>
+      <dl className="grid gap-2 sm:grid-cols-2">
+        <div className="chrome-meta-tile">
+          <dt className="mono-label text-text-secondary">{rootLangLabel}</dt>
+          <dd className="mt-2 font-mono text-sm text-text-primary">{locale}</dd>
+        </div>
+        <div className="chrome-meta-tile">
+          <dt className="mono-label text-text-secondary">{storageLabel}</dt>
+          <dd className="mt-2 font-mono text-sm text-text-primary">{storageValue}</dd>
+        </div>
+      </dl>
     </div>
   );
 }

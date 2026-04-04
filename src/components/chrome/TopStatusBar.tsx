@@ -16,7 +16,7 @@ export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBar
   const { topBar } = strings;
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border-strong bg-panel/96 shadow-panel backdrop-blur-[10px]">
+    <header className="sticky top-0 z-30 border-b border-border-strong bg-panel/96 shadow-panel backdrop-blur-[12px]">
       <div className="mx-auto flex max-w-[1560px] flex-col gap-3 px-3 py-3 md:px-6 lg:px-8">
         <div className="flex flex-col gap-3 2xl:flex-row 2xl:items-start 2xl:justify-between">
           <div className="flex min-w-0 flex-col gap-3">
@@ -58,13 +58,16 @@ export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBar
               ))}
             </dl>
           </div>
-          <div className="grid gap-3 xl:grid-cols-2 2xl:min-w-[33rem]">
+          <div className="grid gap-3 xl:grid-cols-[minmax(17rem,1.02fr)_minmax(18rem,0.98fr)] 2xl:min-w-[39rem]">
             <LocaleToggle
               locale={locale}
               onLocaleChange={setLocale}
               title={topBar.localeToggle.title}
               activeLabel={topBar.localeToggle.activeLabel}
               groupAriaLabel={topBar.localeToggle.groupAriaLabel}
+              rootLangLabel={topBar.localeToggle.rootLangLabel}
+              storageLabel={topBar.localeToggle.storageLabel}
+              storageValue={topBar.localeToggle.storageValue}
               options={topBar.localeToggle.options as Array<{ value: Locale; label: string; fullLabel: string }>}
             />
             <ThemeToggle

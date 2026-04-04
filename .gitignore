@@ -3,4 +3,5 @@ dist
 coverage
 .DS_Store
 .codex-artifacts
-.codex-artifacts
+PLAN.md
+promt*.md

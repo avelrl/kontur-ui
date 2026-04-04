@@ -17,12 +17,24 @@ export function ThemeDocsSection() {
         eyebrow={docs.intro.eyebrow}
         title={docs.intro.title}
         meta={docs.intro.meta}
-        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.12fr)_minmax(20rem,0.88fr)]"
+        bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]"
       >
         <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{docs.intro.description}</p>
-        <div className="surface-field px-4 py-4">
-          <p className="mono-label text-text-secondary">{docs.intro.noteTitle}</p>
-          <p className="mt-3 text-sm leading-6 text-text-primary">{docs.intro.noteText}</p>
+        <div className="grid gap-3">
+          <div className="surface-field px-4 py-4">
+            <p className="mono-label text-text-secondary">{docs.intro.noteTitle}</p>
+            <p className="mt-3 text-sm leading-6 text-text-primary">{docs.intro.noteText}</p>
+          </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{docs.intro.checklistTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {docs.intro.checklistItems.map((item) => (
+                <p key={item} className="text-sm leading-6 text-text-secondary">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </Panel>
 
@@ -32,18 +44,30 @@ export function ThemeDocsSection() {
           eyebrow={docs.tokenFlow.eyebrow}
           title={docs.tokenFlow.title}
           meta={docs.tokenFlow.meta}
-          bodyClassName="space-y-4"
+          bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)]"
         >
-          <ol className="space-y-3 text-sm leading-6 text-text-secondary">
-            {docs.tokenFlow.steps.map((step, index) => (
-              <li key={step}>
-                {index + 1}. {step}
-              </li>
-            ))}
-          </ol>
-          <pre className="code-block">
-            <code>{tokenSnippet}</code>
-          </pre>
+          <div className="space-y-4">
+            <ol className="space-y-3 text-sm leading-6 text-text-secondary">
+              {docs.tokenFlow.steps.map((step, index) => (
+                <li key={step}>
+                  {index + 1}. {step}
+                </li>
+              ))}
+            </ol>
+            <pre className="code-block">
+              <code>{tokenSnippet}</code>
+            </pre>
+          </div>
+          <div className="surface-inset px-4 py-4">
+            <p className="mono-label text-text-secondary">{docs.tokenFlow.verificationTitle}</p>
+            <div className="mt-3 space-y-2.5">
+              {docs.tokenFlow.verificationItems.map((item) => (
+                <p key={item} className="text-sm leading-6 text-text-secondary">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
         </Panel>
 
         <Panel

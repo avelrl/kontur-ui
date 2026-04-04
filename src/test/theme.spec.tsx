@@ -69,6 +69,9 @@ describe("theme switcher", () => {
     render(<App />);
 
     expect(document.documentElement.lang).toBe("ru");
+    expect(screen.getByText("RU / EN")).toBeInTheDocument();
+    expect(screen.getByText("HTML lang")).toBeInTheDocument();
+    expect(screen.getByText("localStorage")).toBeInTheDocument();
 
     const englishButton = screen.getByRole("button", { name: "English" });
     await user.click(englishButton);
@@ -76,6 +79,17 @@ describe("theme switcher", () => {
     expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("en");
     expect(document.documentElement.lang).toBe("en");
     expect(screen.getByRole("heading", { name: "Operational Log" })).toBeInTheDocument();
+  });
+
+  it("restores english locale from storage on first render", () => {
+    installMatchMedia(false);
+    window.localStorage.setItem(LOCALE_STORAGE_KEY, "en");
+
+    render(<App />);
+
+    expect(document.documentElement.lang).toBe("en");
+    expect(screen.getByRole("heading", { name: "Contour Interface Theme" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Pocket Participation Contour" })).toBeInTheDocument();
   });
 
   it("stores manual selection and reacts to system theme changes", async () => {
@@ -106,6 +120,20 @@ describe("theme switcher", () => {
 
     expect(screen.getByRole("table", { name: /архивный реестр/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Оперативный журнал" })).toBeInTheDocument();
+  });
+
+  it("keeps key navigation and registry surfaces stable in english", async () => {
+    installMatchMedia(false);
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: "English" }));
+
+    expect(screen.getByRole("navigation", { name: "Primary bench sections" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Operational module registry" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "How to extend the theme and preserve its character" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Pocket Participation Contour" })).toBeInTheDocument();
   });
 
   it("switches component library tabs and toggles accordion items", async () => {

@@ -4,9 +4,9 @@
 
 :root {
   --sys-bg-canvas: #e7e1d4;
-  --sys-bg-panel: #d6cdbc;
-  --sys-bg-elevated: #f2ecdf;
-  --sys-bg-field: #e9e0d2;
+  --sys-bg-panel: #d3c9ba;
+  --sys-bg-elevated: #f4efe3;
+  --sys-bg-field: #e5dbce;
   --sys-bg-active-module: color-mix(in srgb, #72849a 24%, #f2ecdf);
   --sys-bg-archive-block: color-mix(in srgb, #a48a54 14%, #ebe2d4);
   --sys-border-accent: color-mix(in srgb, #72849a 82%, #2f3438 18%);
@@ -15,21 +15,21 @@
   --sys-text-secondary: #4f5962;
   --sys-text-muted: #687067;
   --sys-border-strong: #6e8096;
-  --sys-border-soft: color-mix(in srgb, #6e8096 32%, #e7e1d4);
-  --sys-border-grid: color-mix(in srgb, #7d8674 28%, #d6cdbc);
+  --sys-border-soft: color-mix(in srgb, #6e8096 42%, #e7e1d4);
+  --sys-border-grid: color-mix(in srgb, #7d8674 34%, #d6cdbc);
   --sys-signal-amber: #c89a3d;
   --sys-signal-green: #728b68;
   --sys-signal-red: #b54834;
   --sys-service-blue: #72849a;
-  --sys-highlight: color-mix(in srgb, #72849a 10%, #f2ede4);
+  --sys-highlight: color-mix(in srgb, #72849a 14%, #f2ede4);
   --sys-radius-panel: 8px;
   --sys-radius-control: 6px;
   --sys-shadow-panel:
-    0 1px 0 rgb(255 255 255 / 0.48),
-    0 14px 28px rgb(61 68 76 / 0.08);
+    0 1px 0 rgb(255 255 255 / 0.52),
+    0 10px 18px rgb(61 68 76 / 0.06);
   --sys-shadow-inset:
-    inset 0 1px 0 rgb(255 255 255 / 0.44),
-    inset 0 -1px 0 rgb(61 68 76 / 0.12);
+    inset 0 1px 0 rgb(255 255 255 / 0.5),
+    inset 0 -1px 0 rgb(61 68 76 / 0.15);
   --sys-font-ui:
     "IBM Plex Sans",
     "PT Sans",
@@ -214,7 +214,9 @@
   .control-group {
     border: 1px solid var(--sys-border-strong);
     border-radius: var(--sys-radius-control);
-    background: var(--sys-bg-field);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 32%, transparent), transparent 58%),
+      var(--sys-bg-field);
     box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
   }
 
@@ -236,6 +238,7 @@
 
   .surface-field,
   .surface-elevated,
+  .surface-inset,
   .surface-active,
   .surface-archive {
     border-radius: var(--sys-radius-control);
@@ -243,13 +246,25 @@
   }
 
   .surface-field {
-    border: 1px solid var(--sys-border-soft);
-    background: var(--sys-bg-field);
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 56%, var(--sys-border-soft));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 26%, transparent), transparent 52%),
+      var(--sys-bg-field);
   }
 
   .surface-elevated {
     border: 1px solid var(--sys-border-strong);
-    background: var(--sys-bg-elevated);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-highlight) 72%, transparent), transparent 60%),
+      var(--sys-bg-elevated);
+  }
+
+  .surface-inset {
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 52%, var(--sys-border-soft));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-canvas) 82%, transparent), transparent 54%),
+      color-mix(in srgb, var(--sys-bg-canvas) 74%, var(--sys-bg-field));
+    box-shadow: var(--sys-shadow-inset);
   }
 
   .surface-active {
@@ -278,9 +293,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 44%, var(--sys-border-soft));
     border-radius: var(--sys-radius-control);
-    background: var(--sys-bg-field);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 24%, transparent), transparent 58%),
+      var(--sys-bg-field);
     padding: 0.44rem 0.7rem;
     font-family: var(--sys-font-mono);
     font-size: 0.72rem;
@@ -305,6 +322,26 @@
     width: 4.5rem;
     border-radius: 999px;
     background: var(--sys-service-blue);
+  }
+
+  .chrome-control-shell {
+    border: 1px solid var(--sys-border-strong);
+    border-radius: var(--sys-radius-panel);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 32%, transparent), transparent 34%),
+      color-mix(in srgb, var(--sys-bg-panel) 88%, var(--sys-bg-elevated));
+    padding: 0.8rem;
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
+  }
+
+  .chrome-meta-tile {
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 50%, var(--sys-border-soft));
+    border-radius: var(--sys-radius-control);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 18%, transparent), transparent 60%),
+      var(--sys-bg-field);
+    padding: 0.72rem 0.8rem;
+    box-shadow: var(--sys-shadow-inset);
   }
 
   .mini-layout-frame {
@@ -335,13 +372,23 @@
 
   .phone-frame {
     width: min(100%, 18.5rem);
-    border: 1px solid var(--sys-border-strong);
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 78%, var(--sys-text-primary));
     border-radius: 1.45rem;
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 40%, transparent), transparent 24%),
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 46%, transparent), transparent 24%),
       var(--sys-bg-canvas);
-    padding: 0.85rem;
+    padding: 0.72rem;
     box-shadow: var(--sys-shadow-panel);
+  }
+
+  .phone-inner-frame {
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 48%, var(--sys-border-soft));
+    border-radius: 1.08rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 18%, transparent), transparent 34%),
+      color-mix(in srgb, var(--sys-bg-canvas) 82%, var(--sys-bg-field));
+    padding: 0.72rem;
+    box-shadow: var(--sys-shadow-inset);
   }
 
   .phone-topline {
@@ -349,10 +396,21 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 54%, var(--sys-border-soft));
     border-radius: 999px;
-    background: var(--sys-bg-active-module);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 24%, transparent), transparent 68%),
+      var(--sys-bg-active-module);
     padding: 0.48rem 0.78rem;
+  }
+
+  .phone-system-band {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.65rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--sys-border-strong) 38%, var(--sys-border-soft));
+    margin-top: 0.72rem;
+    padding: 0 0.1rem 0.52rem;
   }
 
   .phone-status-rack {
@@ -363,9 +421,11 @@
   }
 
   .phone-module {
-    border: 1px solid var(--sys-border-strong);
+    border: 1px solid color-mix(in srgb, var(--sys-border-strong) 64%, var(--sys-border-soft));
     border-radius: var(--sys-radius-control);
-    background: var(--sys-bg-field);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 18%, transparent), transparent 58%),
+      var(--sys-bg-field);
     padding: 0.78rem;
     box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
   }
@@ -381,7 +441,7 @@
   .phone-dock {
     display: flex;
     justify-content: center;
-    border-top: 1px solid var(--sys-border-soft);
+    border-top: 1px solid color-mix(in srgb, var(--sys-border-strong) 40%, var(--sys-border-soft));
     padding-top: 0.7rem;
   }
 
