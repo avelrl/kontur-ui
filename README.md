@@ -120,16 +120,3 @@ When adding a new module:
 3. Build the module from semantic surfaces, borders, labels, and spacing rhythm.
 4. Verify light and dark as two independent versions of one system.
 5. Check that the result still reads as a calm operational interface rather than SaaS, fintech, or marketing UI.
-
-## Public Repository Notes
-
-- The repository is intended for public GitHub publication.
-- `package.json` keeps `"private": true` on purpose to prevent accidental npm publishing. This does not block GitHub publication.
-- Generated artifacts are ignored through `.gitignore`.
-- The included `MIT` license allows reuse with attribution.
-
-## Public Readiness
-
-The repository is in good shape for public GitHub publication: it has a permissive license, a runnable app, tests, and a working build pipeline.
-
-The main remaining question is repository scope, not safety. If you want a cleaner public tree, keep only public-facing documentation and remove internal working notes.
