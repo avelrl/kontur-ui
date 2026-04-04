@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  --sys-bg-canvas: #e8e3d8;
+  --sys-bg-panel: #d7cfc1;
+  --sys-bg-elevated: #f2ede4;
+  --sys-bg-field: #ebe5db;
+  --sys-text-primary: #2f3438;
+  --sys-text-secondary: #566069;
+  --sys-text-muted: #71786e;
+  --sys-border-strong: #72849a;
+  --sys-border-soft: color-mix(in srgb, #72849a 28%, #e8e3d8);
+  --sys-border-grid: color-mix(in srgb, #7d8674 24%, #d7cfc1);
+  --sys-signal-amber: #c89a3d;
+  --sys-signal-green: #728b68;
+  --sys-signal-red: #b54834;
+  --sys-service-blue: #72849a;
+  --sys-highlight: color-mix(in srgb, #72849a 10%, #f2ede4);
+  --sys-radius-panel: 8px;
+  --sys-radius-control: 6px;
+  --sys-shadow-panel:
+    0 1px 0 rgb(255 255 255 / 0.48),
+    0 10px 24px rgb(61 68 76 / 0.08);
+  --sys-shadow-inset:
+    inset 0 1px 0 rgb(255 255 255 / 0.44),
+    inset 0 -1px 0 rgb(61 68 76 / 0.08);
+  --sys-font-ui:
+    "IBM Plex Sans",
+    "PT Sans",
+    "Segoe UI",
+    "Noto Sans",
+    sans-serif;
+  --sys-font-mono:
+    "IBM Plex Mono",
+    "JetBrains Mono",
+    "SFMono-Regular",
+    "Consolas",
+    monospace;
+}
+
+[data-theme="dark"] {
+  --sys-bg-canvas: #1c1f22;
+  --sys-bg-panel: #262b2f;
+  --sys-bg-elevated: #30373d;
+  --sys-bg-field: #202529;
+  --sys-text-primary: #e3dbcf;
+  --sys-text-secondary: #b8b0a4;
+  --sys-text-muted: #8d938e;
+  --sys-border-strong: #56606a;
+  --sys-border-soft: #3a4148;
+  --sys-border-grid: color-mix(in srgb, #72849a 16%, #1c1f22);
+  --sys-signal-amber: #d2a54f;
+  --sys-signal-green: #809a76;
+  --sys-signal-red: #c45d49;
+  --sys-service-blue: #8a9db4;
+  --sys-highlight: color-mix(in srgb, #8a9db4 10%, #30373d);
+  --sys-shadow-panel:
+    0 1px 0 rgb(255 255 255 / 0.05),
+    0 16px 32px rgb(0 0 0 / 0.28);
+  --sys-shadow-inset:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    inset 0 -1px 0 rgb(0 0 0 / 0.24);
+}
+
+@theme inline {
+  --color-canvas: var(--sys-bg-canvas);
+  --color-panel: var(--sys-bg-panel);
+  --color-elevated: var(--sys-bg-elevated);
+  --color-field: var(--sys-bg-field);
+  --color-text-primary: var(--sys-text-primary);
+  --color-text-secondary: var(--sys-text-secondary);
+  --color-text-muted: var(--sys-text-muted);
+  --color-border-strong: var(--sys-border-strong);
+  --color-border-soft: var(--sys-border-soft);
+  --color-border-grid: var(--sys-border-grid);
+  --color-signal-amber: var(--sys-signal-amber);
+  --color-signal-green: var(--sys-signal-green);
+  --color-signal-red: var(--sys-signal-red);
+  --color-service-blue: var(--sys-service-blue);
+  --color-highlight: var(--sys-highlight);
+  --radius-panel: var(--sys-radius-panel);
+  --radius-control: var(--sys-radius-control);
+  --shadow-panel: var(--sys-shadow-panel);
+  --inset-shadow-panel: var(--sys-shadow-inset);
+  --font-ui: var(--sys-font-ui);
+  --font-mono: var(--sys-font-mono);
+}
+
+@layer base {
+  html {
+    background: var(--sys-bg-canvas);
+    font-family: var(--sys-font-ui);
+    color: var(--sys-text-primary);
+    color-scheme: light;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, color-mix(in srgb, var(--sys-bg-elevated) 84%, transparent), transparent 28%),
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-border-grid) 18%, transparent), transparent 24%),
+      var(--sys-bg-canvas);
+  }
+
+  * {
+    border-color: var(--sys-border-soft);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--sys-service-blue) 36%, transparent);
+    color: var(--sys-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--sys-service-blue);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .worksurface {
+    background-image:
+      linear-gradient(90deg, color-mix(in srgb, var(--sys-border-grid) 18%, transparent) 1px, transparent 1px),
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-border-grid) 16%, transparent) 1px, transparent 1px);
+    background-size: 120px 120px;
+    background-position: center top;
+  }
+
+  .kicker {
+    font-family: var(--sys-font-mono);
+    font-size: 0.74rem;
+    line-height: 1.2;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .mono-label {
+    font-family: var(--sys-font-mono);
+    font-size: 0.73rem;
+    line-height: 1.2;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .status-lamp {
+    display: inline-block;
+    height: 0.72rem;
+    width: 0.72rem;
+    border-radius: 9999px;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--sys-border-strong) 76%, transparent),
+      0 0 0.7rem color-mix(in srgb, currentColor 22%, transparent);
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-radius: var(--sys-radius-control);
+    border: 1px solid var(--sys-border-soft);
+    background: var(--sys-bg-field);
+    padding: 0.52rem 0.8rem;
+    font-family: var(--sys-font-mono);
+    font-size: 0.76rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sys-text-secondary);
+    transition:
+      background-color 140ms ease,
+      color 140ms ease,
+      border-color 140ms ease;
+  }
+
+  .status-chip:hover {
+    background: var(--sys-highlight);
+    color: var(--sys-text-primary);
+  }
+
+  .status-block {
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    padding: 0.9rem 1rem;
+    box-shadow: var(--sys-shadow-inset);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

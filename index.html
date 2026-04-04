@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контур UI</title>
+    <script>
+      (() => {
+        const storageKey = "kontur-theme";
+        const root = document.documentElement;
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const readStoredMode = () => {
+          try {
+            const stored = window.localStorage.getItem(storageKey);
+            if (stored === "light" || stored === "dark" || stored === "system") {
+              return stored;
+            }
+          } catch {}
+
+          return "system";
+        };
+
+        const mode = readStoredMode();
+        const resolved = mode === "system" ? (media.matches ? "dark" : "light") : mode;
+
+        root.dataset.themeMode = mode;
+        root.dataset.theme = resolved;
+        root.style.colorScheme = resolved;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
