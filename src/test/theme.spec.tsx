@@ -90,5 +90,37 @@ describe("theme switcher", () => {
     expect(screen.getByRole("table", { name: /архивный реестр/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Оперативный журнал" })).toBeInTheDocument();
   });
-});
 
+  it("switches component library tabs and toggles accordion items", async () => {
+    installMatchMedia(false);
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    await user.click(screen.getByRole("tab", { name: /формы/i }));
+    expect(screen.getByText("Сопроводительная запись")).toBeInTheDocument();
+
+    const labelsAccordion = screen.getByRole("button", { name: /индексные подписи/i });
+    await user.click(labelsAccordion);
+
+    expect(labelsAccordion).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText(/каждый модуль получает короткую моноширинную подпись/i)).toBeInTheDocument();
+  });
+
+  it("renders reusable icon buttons, segmented controls and full layout screens", async () => {
+    installMatchMedia(false);
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    expect(screen.getByRole("button", { name: "Открыть архивный модуль" })).toBeInTheDocument();
+
+    const reserveMode = screen.getByRole("radio", { name: /резервный/i });
+    await user.click(reserveMode);
+    expect(reserveMode).toHaveAttribute("aria-checked", "true");
+
+    expect(screen.getByRole("heading", { name: "Командный пункт" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Архив / документы" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Параметры системы" })).toBeInTheDocument();
+  });
+});

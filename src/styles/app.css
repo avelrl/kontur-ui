@@ -94,6 +94,7 @@
     font-family: var(--sys-font-ui);
     color: var(--sys-text-primary);
     color-scheme: light;
+    scroll-padding-top: 18rem;
   }
 
   body {
@@ -121,6 +122,12 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  @media (min-width: 80rem) {
+    html {
+      scroll-padding-top: 14rem;
+    }
   }
 }
 
@@ -191,6 +198,214 @@
     padding: 0.9rem 1rem;
     box-shadow: var(--sys-shadow-inset);
   }
+
+  .index-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sys-font-mono);
+    font-size: 0.72rem;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sys-text-secondary);
+  }
+
+  .passport-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    padding: 0.44rem 0.7rem;
+    font-family: var(--sys-font-mono);
+    font-size: 0.72rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sys-text-secondary);
+  }
+
+  .graphic-divider {
+    position: relative;
+    height: 1px;
+    background: var(--sys-border-soft);
+  }
+
+  .graphic-divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    height: 3px;
+    width: 4.5rem;
+    border-radius: 999px;
+    background: var(--sys-service-blue);
+  }
+
+  .mini-layout-frame {
+    border: 1px solid var(--sys-border-strong);
+    border-radius: var(--sys-radius-panel);
+    background: var(--sys-bg-canvas);
+    padding: 0.9rem;
+    box-shadow: var(--sys-shadow-panel);
+  }
+
+  .mini-layout-topbar {
+    height: 1rem;
+    width: 100%;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sys-service-blue) 18%, transparent);
+    margin-bottom: 0.75rem;
+  }
+
+  .mini-layout-block {
+    min-height: 4.2rem;
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-panel);
+    padding: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .phone-frame {
+    width: min(100%, 18.5rem);
+    border: 1px solid var(--sys-border-strong);
+    border-radius: 1.45rem;
+    background: var(--sys-bg-canvas);
+    padding: 0.9rem;
+    box-shadow: var(--sys-shadow-panel);
+  }
+
+  .phone-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border: 1px solid var(--sys-border-soft);
+    border-radius: 999px;
+    background: var(--sys-bg-panel);
+    padding: 0.55rem 0.8rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .code-block {
+    overflow-x: auto;
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    padding: 1rem;
+    font-family: var(--sys-font-mono);
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--sys-text-primary);
+  }
+
+  .loading-strip {
+    position: relative;
+    height: 0.65rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sys-border-grid) 55%, transparent);
+  }
+
+  .loading-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 42%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--sys-service-blue) 60%, transparent), transparent);
+    animation: loading-strip 1.6s linear infinite;
+  }
+
+  .screen-shell {
+    border: 1px solid var(--sys-border-strong);
+    border-radius: var(--sys-radius-panel);
+    background: var(--sys-bg-canvas);
+    padding: 1rem;
+    box-shadow: var(--sys-shadow-panel);
+  }
+
+  .screen-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--sys-border-soft);
+    padding-bottom: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .screen-module {
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-panel);
+    padding: 1rem;
+    box-shadow: var(--sys-shadow-inset);
+  }
+
+  .screen-list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--sys-border-soft);
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .screen-list-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .screen-side-nav {
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-panel);
+    padding: 1rem;
+    box-shadow: var(--sys-shadow-inset);
+  }
+
+  .screen-side-nav-item {
+    width: 100%;
+    border: 1px solid var(--sys-border-soft);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    padding: 0.8rem 0.9rem;
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--sys-text-secondary);
+    transition:
+      background-color 140ms ease,
+      color 140ms ease,
+      border-color 140ms ease;
+  }
+
+  .screen-side-nav-item:hover {
+    background: var(--sys-highlight);
+    color: var(--sys-text-primary);
+  }
+
+  .screen-side-nav-item-active {
+    border-color: var(--sys-border-strong);
+    background: var(--sys-bg-elevated);
+    color: var(--sys-text-primary);
+  }
+}
+
+@keyframes loading-strip {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(260%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -203,4 +418,3 @@
     transition-duration: 0.01ms !important;
   }
 }
-

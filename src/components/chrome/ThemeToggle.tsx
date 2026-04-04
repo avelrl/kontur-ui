@@ -18,12 +18,17 @@ const themeOptions: Array<{
   { label: "Системная", value: "system", icon: MonitorCog },
 ];
 
+const resolvedThemeLabelMap: Record<ResolvedTheme, string> = {
+  light: "светлая",
+  dark: "тёмная",
+};
+
 export function ThemeToggle({ mode, resolvedTheme, onModeChange }: ThemeToggleProps) {
   return (
     <div className="flex flex-col gap-2" aria-label="Управление темой">
       <div className="flex items-center justify-between gap-4">
         <span className="kicker">Режим отображения</span>
-        <span className="mono-label text-text-secondary">Активно: {resolvedTheme}</span>
+        <span className="mono-label text-text-secondary">Активно: {resolvedThemeLabelMap[resolvedTheme]}</span>
       </div>
       <div
         role="group"
@@ -57,4 +62,3 @@ export function ThemeToggle({ mode, resolvedTheme, onModeChange }: ThemeTogglePr
     </div>
   );
 }
-

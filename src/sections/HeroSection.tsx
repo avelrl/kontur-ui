@@ -1,20 +1,12 @@
 import { Layers3, RadioTower, ScrollText } from "lucide-react";
-import { operationalSummary, summaryMetrics, toneLabelMap, type StatusTone } from "../data/demo";
-import { cn } from "../lib/cn";
+import { operationalSummary, summaryMetrics, toneLabelMap } from "../data/demo";
 import { PassportBlock } from "../components/chrome/PassportBlock";
 import { Panel } from "../components/ui/Panel";
-
-const toneClassMap: Record<StatusTone, string> = {
-  normal: "bg-text-muted",
-  service: "bg-service-blue",
-  success: "bg-signal-green",
-  warning: "bg-signal-amber",
-  danger: "bg-signal-red",
-};
+import { StatusLamp } from "../components/ui/StatusLamp";
 
 export function HeroSection() {
   return (
-    <section id="overview" className="grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(24rem,0.9fr)]">
+    <section id="overview" className="scroll-mt-40 grid gap-4 xl:grid-cols-[minmax(0,1.4fr)_minmax(24rem,0.9fr)]">
       <Panel
         id="overview-panel"
         eyebrow="Визуальная система / Контур"
@@ -33,7 +25,7 @@ export function HeroSection() {
                 <div key={metric.label} className="rounded-control border border-border-soft bg-field px-4 py-4">
                   <div className="flex items-center justify-between gap-3">
                     <p className="mono-label text-text-secondary">{metric.label}</p>
-                    <span className={cn("status-lamp", toneClassMap[metric.tone])} aria-hidden="true" />
+                    <StatusLamp tone={metric.tone} />
                   </div>
                   <p className="mt-3 text-lg font-semibold text-text-primary">{metric.value}</p>
                   <p className="mt-2 text-sm leading-6 text-text-secondary">{metric.note}</p>
@@ -44,7 +36,7 @@ export function HeroSection() {
           </div>
           <div className="rounded-control border border-border-soft bg-elevated p-4">
             <div className="flex items-center gap-3">
-              <span className="status-lamp bg-signal-amber" aria-hidden="true" />
+              <StatusLamp tone="warning" />
               <div>
                 <p className="kicker">Оперативная сводка</p>
                 <p className="text-sm leading-6 text-text-primary">Текущий стенд фиксирует первичный приборный язык темы.</p>

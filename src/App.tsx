@@ -1,5 +1,12 @@
 import { HeroSection } from "./sections/HeroSection";
+import { FoundationsSection } from "./sections/FoundationsSection";
+import { ComponentLibrarySection } from "./sections/ComponentLibrarySection";
 import { DataHeavySection } from "./sections/DataHeavySection";
+import { DataDisplayExpansionSection } from "./sections/DataDisplayExpansionSection";
+import { SectionChromeSection } from "./sections/SectionChromeSection";
+import { LayoutPatternsSection } from "./sections/LayoutPatternsSection";
+import { MobileSuperappSection } from "./sections/MobileSuperappSection";
+import { ThemeDocsSection } from "./sections/ThemeDocsSection";
 import { TopStatusBar } from "./components/chrome/TopStatusBar";
 import { useThemeMode } from "./lib/theme";
 
@@ -18,10 +25,16 @@ export default function App() {
       <main className="worksurface mx-auto max-w-[1560px] px-3 py-4 md:px-6 md:py-6 lg:px-8">
         <div className="space-y-4">
           <HeroSection />
+          <FoundationsSection />
+          <ComponentLibrarySection />
           <DataHeavySection />
+          <DataDisplayExpansionSection />
+          <SectionChromeSection />
+          <LayoutPatternsSection />
+          <MobileSuperappSection />
+          <ThemeDocsSection />
         </div>
       </main>
     </div>
   );
 }
-

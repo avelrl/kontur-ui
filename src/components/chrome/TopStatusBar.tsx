@@ -1,5 +1,5 @@
 import { RadioTower, ScrollText } from "lucide-react";
-import { topStatusItems } from "../../data/demo";
+import { sectionNavItems, topStatusItems } from "../../data/demo";
 import type { ResolvedTheme, ThemeMode } from "../../lib/theme";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -24,18 +24,20 @@ export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBar
             </div>
             <nav aria-label="Основные разделы стенда">
               <ul className="flex flex-wrap items-center gap-2 text-sm text-text-secondary">
-                <li>
-                  <a className="status-chip" href="#overview">
-                    <ScrollText className="h-4 w-4" aria-hidden="true" />
-                    Вступление
-                  </a>
-                </li>
-                <li>
-                  <a className="status-chip" href="#data-heavy">
-                    <RadioTower className="h-4 w-4" aria-hidden="true" />
-                    Контур данных
-                  </a>
-                </li>
+                {sectionNavItems.map((item, index) => (
+                  <li key={item.href}>
+                    <a className="status-chip" href={item.href}>
+                      {index < 2 ? (
+                        index === 0 ? (
+                          <ScrollText className="h-4 w-4" aria-hidden="true" />
+                        ) : (
+                          <RadioTower className="h-4 w-4" aria-hidden="true" />
+                        )
+                      ) : null}
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>

@@ -5,7 +5,7 @@ import { Panel } from "../components/ui/Panel";
 
 export function DataHeavySection() {
   return (
-    <section id="data-heavy" className="space-y-4">
+    <section id="data-heavy" className="scroll-mt-40 space-y-4">
       <Panel
         id="data-heavy-header"
         eyebrow="Контур данных"
@@ -41,4 +41,3 @@ export function DataHeavySection() {
     </section>
   );
 }
-

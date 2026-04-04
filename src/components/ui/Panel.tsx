@@ -26,6 +26,7 @@ export function Panel({
 
   return (
     <section
+      id={id}
       aria-labelledby={headingId}
       className={cn(
         "overflow-hidden rounded-panel border border-border-strong bg-panel shadow-panel inset-shadow-panel",
@@ -48,4 +49,3 @@ export function Panel({
     </section>
   );
 }
-
