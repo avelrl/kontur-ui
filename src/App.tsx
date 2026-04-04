@@ -8,10 +8,12 @@ import { LayoutPatternsSection } from "./sections/LayoutPatternsSection";
 import { MobileSuperappSection } from "./sections/MobileSuperappSection";
 import { ThemeDocsSection } from "./sections/ThemeDocsSection";
 import { TopStatusBar } from "./components/chrome/TopStatusBar";
+import { LocaleProvider, useLocale } from "./lib/locale";
 import { useThemeMode } from "./lib/theme";
 
-export default function App() {
+function AppFrame() {
   const { mode, resolvedTheme, setMode } = useThemeMode();
+  const { strings } = useLocale();
 
   return (
     <div className="min-h-screen bg-canvas text-text-primary">
@@ -19,7 +21,7 @@ export default function App() {
         href="#overview"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-control focus:bg-elevated focus:px-4 focus:py-3 focus:text-text-primary"
       >
-        Перейти к основному содержимому
+        {strings.skipToContent}
       </a>
       <TopStatusBar mode={mode} resolvedTheme={resolvedTheme} onModeChange={setMode} />
       <main className="worksurface mx-auto max-w-[1560px] px-3 py-4 md:px-6 md:py-6 lg:px-8">
@@ -36,5 +38,13 @@ export default function App() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LocaleProvider>
+      <AppFrame />
+    </LocaleProvider>
   );
 }

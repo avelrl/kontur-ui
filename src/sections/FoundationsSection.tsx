@@ -1,32 +1,28 @@
-import {
-  foundationColors,
-  spacingSteps,
-  structuralTokens,
-  surfaceLayers,
-  typographySamples,
-} from "../data/demo";
 import { Panel } from "../components/ui/Panel";
+import { useLocale } from "../lib/locale";
 
 export function FoundationsSection() {
+  const {
+    strings: {
+      sections: { foundations },
+    },
+  } = useLocale();
+
   return (
     <section id="foundations" className="scroll-mt-40 space-y-4">
       <Panel
         id="foundations-intro"
-        eyebrow="Theme foundations"
-        title="Палитра, surface hierarchy и конструктивные токены"
-        meta="TOKENS / SYSTEM"
+        eyebrow={foundations.intro.eyebrow}
+        title={foundations.intro.title}
+        meta={foundations.intro.meta}
         bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]"
       >
-        <p className="text-sm leading-7 text-text-primary md:text-base">
-          Foundations задают не только цвета, но и поведение поверхности: как различаются canvas, panel,
-          elevated и field, как работают рамка, радиус, тень и spacing rhythm, и почему тёмная тема ощущается
-          самостоятельной приборной версией, а не инверсией светлой.
-        </p>
-        <div className="rounded-control border border-border-soft bg-field px-4 py-4">
-          <p className="mono-label text-text-secondary">Surface hierarchy</p>
+        <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{foundations.intro.description}</p>
+        <div className="surface-field px-4 py-4">
+          <p className="mono-label text-text-secondary">{foundations.intro.sideTitle}</p>
           <div className="mt-3 space-y-3">
-            {surfaceLayers.map((layer) => (
-              <div key={layer.label} className="rounded-control border border-border-soft bg-elevated px-3 py-3">
+            {foundations.intro.surfaceLayers.map((layer) => (
+              <div key={layer.id} className="surface-elevated px-3 py-3">
                 <p className="text-sm font-medium text-text-primary">{layer.label}</p>
                 <p className="mt-1 mono-label text-text-secondary">{layer.token}</p>
                 <p className="mt-2 text-sm leading-6 text-text-secondary">{layer.description}</p>
@@ -39,13 +35,13 @@ export function FoundationsSection() {
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)]">
         <Panel
           id="palette"
-          eyebrow="Палитра и роли"
-          title="Семантические цвета"
-          meta="LIGHT / DARK"
+          eyebrow={foundations.palette.eyebrow}
+          title={foundations.palette.title}
+          meta={foundations.palette.meta}
           bodyClassName="grid gap-3 md:grid-cols-2"
         >
-          {foundationColors.map((color) => (
-            <div key={color.name} className="rounded-control border border-border-soft bg-field p-4">
+          {foundations.palette.colors.map((color) => (
+            <div key={color.id} className="surface-field p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-medium text-text-primary">{color.name}</p>
@@ -75,30 +71,30 @@ export function FoundationsSection() {
 
         <Panel
           id="typography"
-          eyebrow="Типографика"
-          title="Роли текста и маркировок"
-          meta="UI / MONO"
+          eyebrow={foundations.typography.eyebrow}
+          title={foundations.typography.title}
+          meta={foundations.typography.meta}
           bodyClassName="space-y-4"
         >
-          {typographySamples.map((sample, index) => (
-            <div key={sample.role} className="border-b border-border-soft pb-4 last:border-b-0 last:pb-0">
+          {foundations.typography.samples.map((sample, index) => (
+            <div key={sample.id} className="border-b border-border-soft pb-4 last:border-b-0 last:pb-0">
               <p className="mono-label text-text-secondary">{sample.role}</p>
               <p
                 className={
                   index === 0
-                    ? "mt-2 text-2xl font-semibold tracking-[0.01em] text-text-primary"
+                    ? "mt-2 text-[1.7rem] font-semibold tracking-[0.015em] text-text-primary"
                     : index === 1
-                      ? "mt-2 text-lg font-medium text-text-primary"
+                      ? "mt-2 text-lg font-semibold text-text-primary"
                       : index === 2
                         ? "mt-2 mono-label text-text-primary"
                         : index === 4
                           ? "mt-2 font-mono text-base text-text-primary"
-                          : "mt-2 text-sm text-text-primary"
+                          : "mt-2 text-sm leading-7 text-text-primary"
                 }
               >
                 {sample.sample}
               </p>
-              <p className="mt-2 text-sm leading-6 text-text-secondary">{sample.note}</p>
+              <p className="mt-2 text-sm leading-7 text-text-secondary">{sample.note}</p>
             </div>
           ))}
         </Panel>
@@ -107,14 +103,14 @@ export function FoundationsSection() {
       <div className="grid gap-4 xl:grid-cols-[minmax(22rem,0.9fr)_minmax(0,1.1fr)]">
         <Panel
           id="structure-tokens"
-          eyebrow="Конструкция"
-          title="Радиусы, бордеры, тени и spacing rhythm"
-          meta="SHAPE / RHYTHM"
+          eyebrow={foundations.structure.eyebrow}
+          title={foundations.structure.title}
+          meta={foundations.structure.meta}
           bodyClassName="space-y-4"
         >
           <div className="space-y-3">
-            {structuralTokens.map((token) => (
-              <div key={token.label} className="rounded-control border border-border-soft bg-field px-4 py-3">
+            {foundations.structure.tokens.map((token) => (
+              <div key={token.id} className="surface-field px-4 py-3">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-medium text-text-primary">{token.label}</p>
                   <span className="mono-label text-text-secondary">{token.value}</span>
@@ -123,10 +119,10 @@ export function FoundationsSection() {
               </div>
             ))}
           </div>
-          <div className="rounded-control border border-border-soft bg-field px-4 py-4">
-            <p className="mono-label text-text-secondary">Spacing rhythm</p>
+          <div className="surface-field px-4 py-4">
+            <p className="mono-label text-text-secondary">{foundations.structure.spacingLabel}</p>
             <div className="mt-4 flex items-end gap-3">
-              {spacingSteps.map((step) => (
+              {foundations.structure.spacingSteps.map((step) => (
                 <div key={step} className="flex flex-1 flex-col items-center gap-2">
                   <div className="w-full rounded-t-control bg-service-blue/70" style={{ height: `${step * 1.6}px` }} />
                   <span className="mono-label text-text-secondary">{step}px</span>
@@ -138,23 +134,20 @@ export function FoundationsSection() {
 
         <Panel
           id="surface-hierarchy"
-          eyebrow="Поверхность"
-          title="Иерархия слоёв"
-          meta="CANVAS / PANEL / ELEVATED / FIELD"
+          eyebrow={foundations.hierarchy.eyebrow}
+          title={foundations.hierarchy.title}
+          meta={foundations.hierarchy.meta}
           bodyClassName="space-y-4"
         >
           <div className="rounded-panel border border-border-strong bg-canvas p-4 shadow-panel">
             <div className="graphic-divider" />
             <div className="mt-4 rounded-panel border border-border-strong bg-panel p-4 shadow-panel inset-shadow-panel">
-              <p className="mono-label text-text-secondary">Panel</p>
-              <div className="mt-3 rounded-control border border-border-soft bg-elevated p-4">
-                <p className="mono-label text-text-secondary">Elevated</p>
-                <div className="mt-3 rounded-control border border-border-soft bg-field px-4 py-3">
-                  <p className="mono-label text-text-secondary">Field</p>
-                  <p className="mt-2 text-sm leading-6 text-text-primary">
-                    Каждый слой отличается не только цветом, но и функцией: panel удерживает модуль, elevated
-                    акцентирует служебную зону, field оформляет управляемый элемент или метку состояния.
-                  </p>
+              <p className="mono-label text-text-secondary">{foundations.hierarchy.panelLabel}</p>
+              <div className="surface-elevated mt-3 p-4">
+                <p className="mono-label text-text-secondary">{foundations.hierarchy.elevatedLabel}</p>
+                <div className="surface-field mt-3 px-4 py-3">
+                  <p className="mono-label text-text-secondary">{foundations.hierarchy.fieldLabel}</p>
+                  <p className="mt-2 text-sm leading-6 text-text-primary">{foundations.hierarchy.description}</p>
                 </div>
               </div>
             </div>

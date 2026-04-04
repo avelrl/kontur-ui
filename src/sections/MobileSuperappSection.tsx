@@ -1,68 +1,77 @@
-import { mobileScreens, toneLabelMap } from "../data/demo";
+import { useLocale } from "../lib/locale";
 import { StatusLamp } from "../components/ui/StatusLamp";
 import { ToneBadge } from "../components/ui/ToneBadge";
 import { Panel } from "../components/ui/Panel";
 
 export function MobileSuperappSection() {
+  const {
+    strings: {
+      common,
+      sections: { mobile },
+    },
+  } = useLocale();
+
   return (
     <section id="mobile" className="scroll-mt-40 space-y-4">
       <Panel
         id="mobile-intro"
-        eyebrow="Mobile superapp preview"
-        title="Карманный контур участия"
-        meta="MOBILE / PREVIEW"
+        eyebrow={mobile.intro.eyebrow}
+        title={mobile.intro.title}
+        meta={mobile.intro.meta}
         bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)]"
       >
-        <p className="text-sm leading-7 text-text-primary md:text-base">
-          Мобильная версия не превращается в банкинг или маркетплейс. Это карманный терминал участия в проектах,
-          кругах и мастерских, где важны обзор дня, лабораторный модуль и обсуждение по теме рядом.
-        </p>
-        <div className="rounded-control border border-border-soft bg-field px-4 py-4">
-          <p className="mono-label text-text-secondary">Направление</p>
-          <p className="mt-3 text-sm leading-6 text-text-primary">
-            Наука, творчество, самореализация, кружки, мастерские и совместная работа без платежной риторики.
-          </p>
+        <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{mobile.intro.description}</p>
+        <div className="surface-field px-4 py-4">
+          <p className="mono-label text-text-secondary">{mobile.intro.directionTitle}</p>
+          <p className="mt-3 text-sm leading-6 text-text-primary">{mobile.intro.directionText}</p>
         </div>
       </Panel>
 
       <div className="grid gap-4 xl:grid-cols-3">
-        {mobileScreens.map((screen) => (
+        {mobile.screens.map((screen) => (
           <Panel
-            key={screen.title}
-            id={`mobile-${screen.title}`}
+            key={screen.id}
+            id={`mobile-${screen.id}`}
             eyebrow={screen.subtitle}
             title={screen.title}
-            meta="PHONE / MODULE"
+            meta={mobile.panelMeta}
             className="h-full"
             bodyClassName="flex justify-center"
           >
             <div className="phone-frame">
               <div className="phone-topline">
                 <StatusLamp tone="success" />
-                <span className="mono-label text-text-secondary">Канал устойчив</span>
-                <span className="mono-label text-text-secondary">17:40</span>
+                <span className="mono-label text-text-secondary">{mobile.frame.stableChannel}</span>
+                <span className="mono-label text-text-secondary">{mobile.frame.time}</span>
               </div>
-              <div className="space-y-4">
-                <div className="rounded-control border border-border-soft bg-elevated p-3">
+              <div className="phone-status-rack">
+                <span className="passport-tag">{mobile.frame.controlLabel}</span>
+                <span className="passport-tag">{mobile.frame.dockLabel}</span>
+              </div>
+              <div className="mt-3 space-y-3">
+                <div className="phone-module phone-module-head">
                   <p className="text-sm font-medium text-text-primary">{screen.title}</p>
                   <p className="mt-2 text-sm leading-6 text-text-secondary">{screen.subtitle}</p>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {screen.modules.map((module) => (
-                    <div key={module.label} className="rounded-control border border-border-soft bg-field p-3">
+                    <div key={module.id} className="phone-module">
                       <div className="flex items-center justify-between gap-3">
                         <p className="mono-label text-text-secondary">{module.label}</p>
                         <ToneBadge tone={module.tone} className="px-2.5 py-1.5 text-[0.68rem]">
-                          {toneLabelMap[module.tone]}
+                          {common.toneLabels[module.tone]}
                         </ToneBadge>
                       </div>
-                      <p className="mt-3 text-base font-medium text-text-primary">{module.value}</p>
+                      <p className="mt-2.5 text-base font-semibold text-text-primary">{module.value}</p>
                     </div>
                   ))}
                 </div>
-                <div className="rounded-control border border-border-soft bg-field p-3">
+                <div className="phone-module phone-module-note">
                   <p className="text-sm leading-6 text-text-secondary">{screen.footer}</p>
                 </div>
+              </div>
+              <div className="phone-dock mt-3">
+                <span className="phone-dock-indicator" />
               </div>
             </div>
           </Panel>

@@ -11,9 +11,10 @@ export type TabItem = {
 type TabsProps = {
   items: TabItem[];
   defaultTabId?: string;
+  ariaLabel?: string;
 };
 
-export function Tabs({ items, defaultTabId }: TabsProps) {
+export function Tabs({ items, defaultTabId, ariaLabel }: TabsProps) {
   const fallbackId = items[0]?.id;
   const [activeId, setActiveId] = useState(defaultTabId ?? fallbackId ?? "");
   const baseId = useId();
@@ -55,7 +56,7 @@ export function Tabs({ items, defaultTabId }: TabsProps) {
 
   return (
     <div className="space-y-4">
-      <div role="tablist" aria-label="Категории компонентов" className="flex flex-wrap gap-2">
+      <div role="tablist" aria-label={ariaLabel} className="flex flex-wrap gap-2">
         {items.map((item, index) => {
           const isActive = item.id === activeItem.id;
           const tabId = `${baseId}-${item.id}-tab`;
@@ -77,14 +78,18 @@ export function Tabs({ items, defaultTabId }: TabsProps) {
                 "rounded-control border px-3 py-2 text-left transition-colors duration-150",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-service-blue focus-visible:ring-offset-2 focus-visible:ring-offset-panel",
                 isActive
-                  ? "border-border-strong bg-elevated text-text-primary"
+                  ? "control-active"
                   : "border-border-soft bg-field text-text-secondary hover:bg-highlight hover:text-text-primary",
               )}
               onClick={() => setActiveId(item.id)}
               onKeyDown={(event) => onKeyDown(event, index)}
             >
               <span className="block text-sm font-medium">{item.label}</span>
-              {item.meta ? <span className="mt-1 block mono-label text-text-secondary">{item.meta}</span> : null}
+              {item.meta ? (
+                <span className={cn("mt-1 block mono-label", isActive ? "control-active-meta" : "text-text-secondary")}>
+                  {item.meta}
+                </span>
+              ) : null}
             </button>
           );
         })}
@@ -94,7 +99,7 @@ export function Tabs({ items, defaultTabId }: TabsProps) {
         id={`${baseId}-${activeItem.id}-panel`}
         role="tabpanel"
         aria-labelledby={`${baseId}-${activeItem.id}-tab`}
-        className="rounded-control border border-border-soft bg-field p-4"
+        className="rounded-control border border-border-strong bg-field p-4 shadow-panel inset-shadow-panel"
       >
         {activeItem.content}
       </div>

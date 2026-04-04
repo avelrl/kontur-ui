@@ -1,16 +1,10 @@
 import { BookText, Radar, Scale, SquareActivity } from "lucide-react";
-import {
-  analyticsCards,
-  documentationModules,
-  progressScales,
-  registryRows,
-  systemStateCards,
-  type StatusTone,
-} from "../data/demo";
+import type { StatusTone } from "../data/demo";
 import { MetricBars } from "../components/ui/MetricBars";
 import { ToneBadge } from "../components/ui/ToneBadge";
 import { Panel } from "../components/ui/Panel";
 import { cn } from "../lib/cn";
+import { useLocale } from "../lib/locale";
 
 const toneBgClassMap: Record<StatusTone, string> = {
   normal: "bg-text-muted",
@@ -21,27 +15,30 @@ const toneBgClassMap: Record<StatusTone, string> = {
 };
 
 export function DataDisplayExpansionSection() {
+  const {
+    strings: {
+      common,
+      sections: { dataDisplay },
+    },
+  } = useLocale();
+
   return (
     <section id="data-display" className="scroll-mt-40 space-y-4">
       <Panel
         id="data-display-intro"
-        eyebrow="Data display expansion"
-        title="Показатели, шкалы, state cards и документационные модули"
-        meta="ANALYTICS / STATES / REGISTRY"
+        eyebrow={dataDisplay.intro.eyebrow}
+        title={dataDisplay.intro.title}
+        meta={dataDisplay.intro.meta}
         bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]"
       >
-        <p className="text-sm leading-7 text-text-primary md:text-base">
-          Data-display строится не как витрина KPI, а как система чтения состояния: аналитические блоки показывают
-          динамику, шкалы фиксируют степень готовности, системные карточки удерживают статус контура, а реестры
-          и таблицы показывают, что нужно делать дальше.
-        </p>
-        <div className="rounded-control border border-border-soft bg-field px-4 py-4">
-          <p className="mono-label text-text-secondary">State patterns</p>
+        <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{dataDisplay.intro.description}</p>
+        <div className="surface-field px-4 py-4">
+          <p className="mono-label text-text-secondary">{dataDisplay.intro.patternsTitle}</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <ToneBadge tone="success">Штатно</ToneBadge>
-            <ToneBadge tone="service">Служебный контур</ToneBadge>
-            <ToneBadge tone="warning">Требует подтверждения</ToneBadge>
-            <ToneBadge tone="danger">Нарушение контура</ToneBadge>
+            <ToneBadge tone="success">{common.toneLabels.success}</ToneBadge>
+            <ToneBadge tone="service">{common.toneLabels.service}</ToneBadge>
+            <ToneBadge tone="warning">{common.toneLabels.warning}</ToneBadge>
+            <ToneBadge tone="danger">{common.toneLabels.danger}</ToneBadge>
           </div>
         </div>
       </Panel>
@@ -49,13 +46,13 @@ export function DataDisplayExpansionSection() {
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)]">
         <Panel
           id="analytics"
-          eyebrow="Аналитические блоки"
-          title="Измерения и динамика"
-          meta="ANALYTICS / MINI-CHARTS"
+          eyebrow={dataDisplay.analytics.eyebrow}
+          title={dataDisplay.analytics.title}
+          meta={dataDisplay.analytics.meta}
           bodyClassName="grid gap-4 md:grid-cols-3"
         >
-          {analyticsCards.map((card) => (
-            <div key={card.label} className="rounded-control border border-border-soft bg-field p-4">
+          {dataDisplay.analytics.cards.map((card) => (
+            <div key={card.id} className="surface-field p-4">
               <p className="mono-label text-text-secondary">{card.label}</p>
               <p className="mt-3 text-2xl font-semibold text-text-primary">{card.value}</p>
               <p className="mt-2 text-sm leading-6 text-text-secondary">{card.note}</p>
@@ -68,14 +65,14 @@ export function DataDisplayExpansionSection() {
 
         <Panel
           id="system-cards"
-          eyebrow="Системные карточки состояния"
-          title="Шкалы готовности и состояния"
-          meta="SCALES / STATUS"
+          eyebrow={dataDisplay.systemCards.eyebrow}
+          title={dataDisplay.systemCards.title}
+          meta={dataDisplay.systemCards.meta}
           bodyClassName="space-y-4"
         >
           <div className="space-y-3">
-            {progressScales.map((scale) => (
-              <div key={scale.label} className="rounded-control border border-border-soft bg-field p-4">
+            {dataDisplay.systemCards.scales.map((scale) => (
+              <div key={scale.id} className="surface-field p-4">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-medium text-text-primary">{scale.label}</p>
                   <span className="mono-label text-text-secondary">{scale.value}%</span>
@@ -93,8 +90,8 @@ export function DataDisplayExpansionSection() {
           </div>
 
           <div className="grid gap-3">
-            {systemStateCards.map((card) => (
-              <div key={card.title} className="rounded-control border border-border-soft bg-elevated p-4">
+            {dataDisplay.systemCards.cards.map((card) => (
+              <div key={card.id} className="surface-elevated p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm font-medium text-text-primary">{card.title}</p>
@@ -112,13 +109,13 @@ export function DataDisplayExpansionSection() {
       <div className="grid gap-4 xl:grid-cols-[minmax(20rem,0.84fr)_minmax(0,1.16fr)]">
         <Panel
           id="docs-modules"
-          eyebrow="Документационные модули"
-          title="Служебные блоки объяснения"
-          meta="DOCS / GUIDES"
+          eyebrow={dataDisplay.docsModules.eyebrow}
+          title={dataDisplay.docsModules.title}
+          meta={dataDisplay.docsModules.meta}
           bodyClassName="space-y-4"
         >
-          {documentationModules.map((module) => (
-            <div key={module.title} className="rounded-control border border-border-soft bg-field p-4">
+          {dataDisplay.docsModules.modules.map((module) => (
+            <div key={module.id} className="surface-field p-4">
               <div className="flex items-center gap-2">
                 <BookText className="h-4 w-4 text-service-blue" aria-hidden="true" />
                 <p className="text-sm font-medium text-text-primary">{module.title}</p>
@@ -136,15 +133,15 @@ export function DataDisplayExpansionSection() {
 
         <Panel
           id="registry-state-table"
-          eyebrow="Реестры и state patterns"
-          title="Операционный реестр модулей"
-          meta="REGISTRY / ACTIONS"
+          eyebrow={dataDisplay.registryTable.eyebrow}
+          title={dataDisplay.registryTable.title}
+          meta={dataDisplay.registryTable.meta}
           bodyClassName="space-y-4 px-0 py-0"
         >
           <div className="flex items-center justify-between gap-3 border-b border-border-soft px-4 py-3 md:px-5">
             <div className="flex items-center gap-2">
               <SquareActivity className="h-4 w-4 text-service-blue" aria-hidden="true" />
-              <p className="text-sm text-text-primary">В таблице у каждой строки есть состояние, канал и следующее действие.</p>
+              <p className="text-sm text-text-primary">{dataDisplay.registryTable.introText}</p>
             </div>
             <div className="flex items-center gap-2 text-xs text-text-secondary">
               <Radar className="h-4 w-4 text-signal-green" aria-hidden="true" />
@@ -153,19 +150,19 @@ export function DataDisplayExpansionSection() {
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse text-left">
-              <caption className="sr-only">Операционный реестр модулей</caption>
+              <caption className="sr-only">{dataDisplay.registryTable.caption}</caption>
               <thead>
                 <tr className="bg-field text-xs uppercase tracking-[0.24em] text-text-secondary">
-                  <th className="px-4 py-3 font-mono font-normal md:px-5">Код</th>
-                  <th className="px-4 py-3 font-mono font-normal">Модуль</th>
-                  <th className="px-4 py-3 font-mono font-normal">Ответственный</th>
-                  <th className="px-4 py-3 font-mono font-normal">Синхронизация</th>
-                  <th className="px-4 py-3 font-mono font-normal">Состояние</th>
-                  <th className="px-4 py-3 font-mono font-normal md:px-5">Следующее действие</th>
+                  <th className="px-4 py-3 font-mono font-normal md:px-5">{dataDisplay.registryTable.columns.code}</th>
+                  <th className="px-4 py-3 font-mono font-normal">{dataDisplay.registryTable.columns.module}</th>
+                  <th className="px-4 py-3 font-mono font-normal">{dataDisplay.registryTable.columns.owner}</th>
+                  <th className="px-4 py-3 font-mono font-normal">{dataDisplay.registryTable.columns.sync}</th>
+                  <th className="px-4 py-3 font-mono font-normal">{dataDisplay.registryTable.columns.state}</th>
+                  <th className="px-4 py-3 font-mono font-normal md:px-5">{dataDisplay.registryTable.columns.action}</th>
                 </tr>
               </thead>
               <tbody>
-                {registryRows.map((row) => (
+                {dataDisplay.registryTable.rows.map((row) => (
                   <tr key={row.code} className="border-t border-border-soft">
                     <td className="px-4 py-4 font-mono text-sm text-text-primary md:px-5">{row.code}</td>
                     <td className="px-4 py-4 text-sm font-medium text-text-primary">{row.module}</td>

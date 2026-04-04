@@ -6,50 +6,62 @@ type ThemeToggleProps = {
   mode: ThemeMode;
   resolvedTheme: ResolvedTheme;
   onModeChange: (mode: ThemeMode) => void;
+  title: string;
+  activeLabel: string;
+  groupAriaLabel: string;
+  resolvedThemeLabels: Record<ResolvedTheme, string>;
+  options: Array<{
+    value: ThemeMode;
+    label: string;
+    buttonLabel: string;
+  }>;
 };
 
-const themeOptions: Array<{
-  label: string;
-  value: ThemeMode;
-  icon: typeof SunMedium;
-}> = [
-  { label: "Светлая", value: "light", icon: SunMedium },
-  { label: "Тёмная", value: "dark", icon: MoonStar },
-  { label: "Системная", value: "system", icon: MonitorCog },
-];
-
-const resolvedThemeLabelMap: Record<ResolvedTheme, string> = {
-  light: "светлая",
-  dark: "тёмная",
+const themeIconMap: Record<ThemeMode, typeof SunMedium> = {
+  light: SunMedium,
+  dark: MoonStar,
+  system: MonitorCog,
 };
 
-export function ThemeToggle({ mode, resolvedTheme, onModeChange }: ThemeToggleProps) {
+export function ThemeToggle({
+  mode,
+  resolvedTheme,
+  onModeChange,
+  title,
+  activeLabel,
+  groupAriaLabel,
+  resolvedThemeLabels,
+  options,
+}: ThemeToggleProps) {
   return (
-    <div className="flex flex-col gap-2" aria-label="Управление темой">
+    <div className="flex min-w-[16rem] flex-col gap-2" aria-label={title}>
       <div className="flex items-center justify-between gap-4">
-        <span className="kicker">Режим отображения</span>
-        <span className="mono-label text-text-secondary">Активно: {resolvedThemeLabelMap[resolvedTheme]}</span>
+        <span className="kicker">{title}</span>
+        <span className="mono-label text-text-secondary">
+          {activeLabel}: {resolvedThemeLabels[resolvedTheme]}
+        </span>
       </div>
       <div
         role="group"
-        aria-label="Переключатель темы"
-        className="inline-flex rounded-control border border-border-strong bg-field p-1 inset-shadow-panel"
+        aria-label={groupAriaLabel}
+        className="control-group inline-flex p-1"
       >
-        {themeOptions.map(({ label, value, icon: Icon }) => {
+        {options.map(({ label, value, buttonLabel }) => {
           const isActive = mode === value;
+          const Icon = themeIconMap[value];
 
           return (
             <button
               key={value}
               type="button"
               aria-pressed={isActive}
-              aria-label={`${label} тема`}
+              aria-label={buttonLabel}
               className={cn(
-                "inline-flex min-w-[7.4rem] items-center justify-center gap-2 rounded-[calc(var(--sys-radius-control)-2px)] px-3 py-2 text-sm font-medium transition-colors duration-150",
+                "inline-flex min-w-[4.9rem] items-center justify-center gap-2 rounded-[calc(var(--sys-radius-control)-2px)] border px-3 py-2 text-sm font-medium transition-colors duration-150",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-service-blue focus-visible:ring-offset-2 focus-visible:ring-offset-panel",
                 isActive
-                  ? "bg-elevated text-text-primary shadow-panel"
-                  : "text-text-secondary hover:bg-highlight hover:text-text-primary",
+                  ? "control-active"
+                  : "border-transparent text-text-secondary hover:bg-highlight hover:text-text-primary",
               )}
               onClick={() => onModeChange(value)}
             >

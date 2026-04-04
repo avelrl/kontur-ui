@@ -26,7 +26,7 @@ export function Accordion({ items, defaultItemId }: AccordionProps) {
         const panelId = `${baseId}-${item.id}-panel`;
 
         return (
-          <div key={item.id} className="rounded-control border border-border-soft bg-field">
+          <div key={item.id} className="rounded-control border border-border-strong bg-field shadow-panel inset-shadow-panel">
             <h3>
               <button
                 id={buttonId}
@@ -41,7 +41,7 @@ export function Accordion({ items, defaultItemId }: AccordionProps) {
                   {item.meta ? <span className="mt-1 block mono-label text-text-secondary">{item.meta}</span> : null}
                 </span>
                 <ChevronDown
-                  className={cn("h-4 w-4 text-text-secondary transition-transform duration-150", isOpen && "rotate-180")}
+                  className={cn("h-4 w-4 text-text-secondary transition-transform duration-150", isOpen && "rotate-180 text-text-primary")}
                   aria-hidden="true"
                 />
               </button>
@@ -53,7 +53,9 @@ export function Accordion({ items, defaultItemId }: AccordionProps) {
               className={cn("grid transition-[grid-template-rows] duration-150", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
             >
               <div className="overflow-hidden">
-                <div className="border-t border-border-soft px-4 py-4 text-sm leading-6 text-text-secondary">{item.content}</div>
+                <div className="border-t border-border-soft bg-[color-mix(in_srgb,var(--sys-bg-elevated)_42%,transparent)] px-4 py-4 text-sm leading-6 text-text-secondary">
+                  {item.content}
+                </div>
               </div>
             </div>
           </div>

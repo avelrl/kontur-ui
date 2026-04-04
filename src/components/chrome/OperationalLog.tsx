@@ -1,19 +1,26 @@
-import { operationalLog, toneLabelMap } from "../../data/demo";
+import { useLocale } from "../../lib/locale";
 import { Panel } from "../ui/Panel";
 import { ToneBadge } from "../ui/ToneBadge";
 
 export function OperationalLog() {
+  const {
+    strings: {
+      common,
+      sections: { dataHeavy },
+    },
+  } = useLocale();
+
   return (
     <Panel
       id="operational-log"
-      eyebrow="Журнал событий"
-      title="Оперативный журнал"
-      meta="LOG / 05 записей"
+      eyebrow={dataHeavy.log.eyebrow}
+      title={dataHeavy.log.title}
+      meta={dataHeavy.log.meta}
       className="h-full"
       bodyClassName="p-0"
     >
       <ol className="divide-y divide-border-soft">
-        {operationalLog.map((entry) => (
+        {dataHeavy.log.entries.map((entry) => (
           <li key={`${entry.time}-${entry.channel}`} className="grid gap-3 px-4 py-4 md:px-5">
             <div className="flex items-center justify-between gap-3">
               <span className="mono-label text-text-primary">{entry.system}</span>
@@ -23,7 +30,7 @@ export function OperationalLog() {
             <div className="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
               <span className="status-chip">{entry.channel}</span>
               <ToneBadge tone={entry.tone} className="px-2.5 py-1.5 text-[0.68rem]">
-                {toneLabelMap[entry.tone]}
+                {common.toneLabels[entry.tone]}
               </ToneBadge>
             </div>
           </li>

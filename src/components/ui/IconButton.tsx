@@ -13,11 +13,11 @@ type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClassMap: Record<IconButtonVariant, string> = {
   secondary:
-    "border-border-strong bg-elevated text-text-primary hover:bg-highlight focus-visible:ring-service-blue",
+    "border-border-strong bg-active-module text-text-primary hover:bg-highlight focus-visible:ring-service-blue shadow-panel inset-shadow-panel",
   ghost:
-    "border-border-soft bg-field text-text-secondary hover:border-border-strong hover:text-text-primary hover:bg-highlight focus-visible:ring-service-blue",
+    "border-border-soft bg-field text-text-secondary hover:border-border-strong hover:text-text-primary hover:bg-highlight focus-visible:ring-service-blue inset-shadow-panel",
   danger:
-    "border-border-soft bg-elevated text-signal-red hover:bg-highlight focus-visible:ring-signal-red",
+    "border-border-soft bg-archive-block text-signal-red hover:bg-highlight focus-visible:ring-signal-red shadow-panel",
 };
 
 const sizeClassMap: Record<IconButtonSize, string> = {

@@ -14,7 +14,7 @@ export function ToneBadge({ tone, className, children }: ToneBadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-control border px-3 py-2 font-mono text-[0.72rem] leading-none tracking-[0.12em] uppercase",
+        "inline-flex items-center gap-2 rounded-control border px-3 py-2 font-mono text-[0.72rem] leading-none tracking-[0.12em] uppercase shadow-panel inset-shadow-panel",
         statusBadgeToneClassMap[tone],
         className,
       )}

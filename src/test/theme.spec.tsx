@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import App from "../App";
+import { LOCALE_STORAGE_KEY } from "../lib/locale";
 import {
   THEME_STORAGE_KEY,
   applyThemeToRoot,
@@ -61,6 +62,22 @@ describe("theme helpers", () => {
 });
 
 describe("theme switcher", () => {
+  it("stores selected locale and updates html lang", async () => {
+    installMatchMedia(false);
+    const user = userEvent.setup();
+
+    render(<App />);
+
+    expect(document.documentElement.lang).toBe("ru");
+
+    const englishButton = screen.getByRole("button", { name: "English" });
+    await user.click(englishButton);
+
+    expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("en");
+    expect(document.documentElement.lang).toBe("en");
+    expect(screen.getByRole("heading", { name: "Operational Log" })).toBeInTheDocument();
+  });
+
   it("stores manual selection and reacts to system theme changes", async () => {
     const media = installMatchMedia(false);
     const user = userEvent.setup();

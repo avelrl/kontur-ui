@@ -13,18 +13,18 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClassMap: Record<ButtonVariant, string> = {
   primary:
-    "border-border-strong bg-text-primary text-canvas hover:bg-text-primary/90 focus-visible:ring-service-blue",
+    "border-border-strong bg-text-primary text-canvas hover:bg-text-primary/90 focus-visible:ring-service-blue shadow-panel",
   secondary:
-    "border-border-strong bg-elevated text-text-primary hover:bg-highlight focus-visible:ring-service-blue",
+    "border-border-strong bg-active-module text-text-primary hover:bg-highlight focus-visible:ring-service-blue shadow-panel inset-shadow-panel",
   ghost:
-    "border-border-soft bg-field text-text-secondary hover:border-border-strong hover:text-text-primary hover:bg-highlight focus-visible:ring-service-blue",
+    "border-border-soft bg-field text-text-secondary hover:border-border-strong hover:text-text-primary hover:bg-highlight focus-visible:ring-service-blue inset-shadow-panel",
   danger:
-    "border-border-soft bg-elevated text-signal-red hover:bg-highlight focus-visible:ring-signal-red",
+    "border-border-soft bg-archive-block text-signal-red hover:bg-highlight focus-visible:ring-signal-red shadow-panel",
 };
 
 const sizeClassMap: Record<ButtonSize, string> = {
   sm: "min-h-9 px-3 py-2 text-sm",
-  md: "min-h-11 px-4 py-2.5 text-sm",
+  md: "min-h-[2.625rem] px-4 py-2.5 text-sm",
 };
 
 export function Button({

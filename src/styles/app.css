@@ -3,16 +3,20 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
-  --sys-bg-canvas: #e8e3d8;
-  --sys-bg-panel: #d7cfc1;
-  --sys-bg-elevated: #f2ede4;
-  --sys-bg-field: #ebe5db;
+  --sys-bg-canvas: #e7e1d4;
+  --sys-bg-panel: #d6cdbc;
+  --sys-bg-elevated: #f2ecdf;
+  --sys-bg-field: #e9e0d2;
+  --sys-bg-active-module: color-mix(in srgb, #72849a 24%, #f2ecdf);
+  --sys-bg-archive-block: color-mix(in srgb, #a48a54 14%, #ebe2d4);
+  --sys-border-accent: color-mix(in srgb, #72849a 82%, #2f3438 18%);
+  --sys-active-ink: #243038;
   --sys-text-primary: #2f3438;
-  --sys-text-secondary: #566069;
-  --sys-text-muted: #71786e;
-  --sys-border-strong: #72849a;
-  --sys-border-soft: color-mix(in srgb, #72849a 28%, #e8e3d8);
-  --sys-border-grid: color-mix(in srgb, #7d8674 24%, #d7cfc1);
+  --sys-text-secondary: #4f5962;
+  --sys-text-muted: #687067;
+  --sys-border-strong: #6e8096;
+  --sys-border-soft: color-mix(in srgb, #6e8096 32%, #e7e1d4);
+  --sys-border-grid: color-mix(in srgb, #7d8674 28%, #d6cdbc);
   --sys-signal-amber: #c89a3d;
   --sys-signal-green: #728b68;
   --sys-signal-red: #b54834;
@@ -22,10 +26,10 @@
   --sys-radius-control: 6px;
   --sys-shadow-panel:
     0 1px 0 rgb(255 255 255 / 0.48),
-    0 10px 24px rgb(61 68 76 / 0.08);
+    0 14px 28px rgb(61 68 76 / 0.08);
   --sys-shadow-inset:
     inset 0 1px 0 rgb(255 255 255 / 0.44),
-    inset 0 -1px 0 rgb(61 68 76 / 0.08);
+    inset 0 -1px 0 rgb(61 68 76 / 0.12);
   --sys-font-ui:
     "IBM Plex Sans",
     "PT Sans",
@@ -43,14 +47,18 @@
 [data-theme="dark"] {
   --sys-bg-canvas: #1c1f22;
   --sys-bg-panel: #262b2f;
-  --sys-bg-elevated: #30373d;
-  --sys-bg-field: #202529;
+  --sys-bg-elevated: #2e363c;
+  --sys-bg-field: #20262b;
+  --sys-bg-active-module: color-mix(in srgb, #8a9db4 14%, #2e363c);
+  --sys-bg-archive-block: color-mix(in srgb, #957b47 11%, #24292d);
+  --sys-border-accent: color-mix(in srgb, #8a9db4 78%, #d8d0c4 22%);
+  --sys-active-ink: #ece4d8;
   --sys-text-primary: #e3dbcf;
-  --sys-text-secondary: #b8b0a4;
+  --sys-text-secondary: #c2b9ad;
   --sys-text-muted: #8d938e;
-  --sys-border-strong: #56606a;
-  --sys-border-soft: #3a4148;
-  --sys-border-grid: color-mix(in srgb, #72849a 16%, #1c1f22);
+  --sys-border-strong: #5a6671;
+  --sys-border-soft: #3b434b;
+  --sys-border-grid: color-mix(in srgb, #72849a 18%, #1c1f22);
   --sys-signal-amber: #d2a54f;
   --sys-signal-green: #809a76;
   --sys-signal-red: #c45d49;
@@ -69,10 +77,13 @@
   --color-panel: var(--sys-bg-panel);
   --color-elevated: var(--sys-bg-elevated);
   --color-field: var(--sys-bg-field);
+  --color-active-module: var(--sys-bg-active-module);
+  --color-archive-block: var(--sys-bg-archive-block);
   --color-text-primary: var(--sys-text-primary);
   --color-text-secondary: var(--sys-text-secondary);
   --color-text-muted: var(--sys-text-muted);
   --color-border-strong: var(--sys-border-strong);
+  --color-border-accent: var(--sys-border-accent);
   --color-border-soft: var(--sys-border-soft);
   --color-border-grid: var(--sys-border-grid);
   --color-signal-amber: var(--sys-signal-amber);
@@ -171,15 +182,16 @@
     align-items: center;
     gap: 0.45rem;
     border-radius: var(--sys-radius-control);
-    border: 1px solid var(--sys-border-soft);
-    background: var(--sys-bg-field);
-    padding: 0.52rem 0.8rem;
+    border: 1px solid var(--sys-border-strong);
+    background: var(--sys-bg-active-module);
+    padding: 0.5rem 0.76rem;
     font-family: var(--sys-font-mono);
     font-size: 0.76rem;
     line-height: 1;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--sys-text-secondary);
+    box-shadow: var(--sys-shadow-panel);
     transition:
       background-color 140ms ease,
       color 140ms ease,
@@ -192,11 +204,62 @@
   }
 
   .status-block {
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid var(--sys-border-strong);
     border-radius: var(--sys-radius-control);
     background: var(--sys-bg-field);
-    padding: 0.9rem 1rem;
+    padding: 0.8rem 1rem;
     box-shadow: var(--sys-shadow-inset);
+  }
+
+  .control-group {
+    border: 1px solid var(--sys-border-strong);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
+  }
+
+  .control-active {
+    border: 1px solid var(--sys-border-accent);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-service-blue) 18%, transparent), transparent 58%),
+      var(--sys-bg-active-module);
+    color: var(--sys-active-ink);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--sys-border-accent) 26%, transparent),
+      var(--sys-shadow-panel),
+      var(--sys-shadow-inset);
+  }
+
+  .control-active-meta {
+    color: color-mix(in srgb, var(--sys-active-ink) 78%, var(--sys-text-secondary));
+  }
+
+  .surface-field,
+  .surface-elevated,
+  .surface-active,
+  .surface-archive {
+    border-radius: var(--sys-radius-control);
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
+  }
+
+  .surface-field {
+    border: 1px solid var(--sys-border-soft);
+    background: var(--sys-bg-field);
+  }
+
+  .surface-elevated {
+    border: 1px solid var(--sys-border-strong);
+    background: var(--sys-bg-elevated);
+  }
+
+  .surface-active {
+    border: 1px solid var(--sys-border-strong);
+    background: var(--sys-bg-active-module);
+  }
+
+  .surface-archive {
+    border: 1px solid color-mix(in srgb, var(--sys-signal-amber) 38%, var(--sys-border-strong));
+    background: var(--sys-bg-archive-block);
   }
 
   .index-label {
@@ -274,8 +337,10 @@
     width: min(100%, 18.5rem);
     border: 1px solid var(--sys-border-strong);
     border-radius: 1.45rem;
-    background: var(--sys-bg-canvas);
-    padding: 0.9rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 40%, transparent), transparent 24%),
+      var(--sys-bg-canvas);
+    padding: 0.85rem;
     box-shadow: var(--sys-shadow-panel);
   }
 
@@ -286,9 +351,45 @@
     gap: 0.75rem;
     border: 1px solid var(--sys-border-soft);
     border-radius: 999px;
-    background: var(--sys-bg-panel);
-    padding: 0.55rem 0.8rem;
-    margin-bottom: 0.9rem;
+    background: var(--sys-bg-active-module);
+    padding: 0.48rem 0.78rem;
+  }
+
+  .phone-status-rack {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .phone-module {
+    border: 1px solid var(--sys-border-strong);
+    border-radius: var(--sys-radius-control);
+    background: var(--sys-bg-field);
+    padding: 0.78rem;
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
+  }
+
+  .phone-module-head {
+    background: var(--sys-bg-active-module);
+  }
+
+  .phone-module-note {
+    background: var(--sys-bg-archive-block);
+  }
+
+  .phone-dock {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid var(--sys-border-soft);
+    padding-top: 0.7rem;
+  }
+
+  .phone-dock-indicator {
+    height: 0.28rem;
+    width: 4.8rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sys-text-secondary) 42%, transparent);
   }
 
   .code-block {
@@ -325,8 +426,26 @@
     border: 1px solid var(--sys-border-strong);
     border-radius: var(--sys-radius-panel);
     background: var(--sys-bg-canvas);
-    padding: 1rem;
+    padding: 0.95rem;
     box-shadow: var(--sys-shadow-panel);
+  }
+
+  .screen-shell-dashboard {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-active-module) 36%, transparent), transparent 22%),
+      var(--sys-bg-canvas);
+  }
+
+  .screen-shell-archive {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-archive-block) 38%, transparent), transparent 24%),
+      var(--sys-bg-canvas);
+  }
+
+  .screen-shell-settings {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--sys-bg-elevated) 52%, transparent), transparent 20%),
+      var(--sys-bg-canvas);
   }
 
   .screen-toolbar {
@@ -336,16 +455,30 @@
     justify-content: space-between;
     gap: 0.75rem;
     border-bottom: 1px solid var(--sys-border-soft);
-    padding-bottom: 0.9rem;
-    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.95rem;
   }
 
   .screen-module {
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid var(--sys-border-strong);
     border-radius: var(--sys-radius-control);
     background: var(--sys-bg-panel);
-    padding: 1rem;
-    box-shadow: var(--sys-shadow-inset);
+    padding: 0.95rem;
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
+  }
+
+  .screen-module-active {
+    background: var(--sys-bg-active-module);
+  }
+
+  .screen-module-archive {
+    background: var(--sys-bg-archive-block);
+    border-color: color-mix(in srgb, var(--sys-signal-amber) 40%, var(--sys-border-strong));
+  }
+
+  .screen-module-warning {
+    background: color-mix(in srgb, var(--sys-bg-archive-block) 78%, var(--sys-bg-panel));
+    border-color: color-mix(in srgb, var(--sys-signal-amber) 52%, var(--sys-border-strong));
   }
 
   .screen-list-row {
@@ -365,19 +498,19 @@
   }
 
   .screen-side-nav {
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid color-mix(in srgb, var(--sys-signal-amber) 36%, var(--sys-border-strong));
     border-radius: var(--sys-radius-control);
-    background: var(--sys-bg-panel);
-    padding: 1rem;
-    box-shadow: var(--sys-shadow-inset);
+    background: var(--sys-bg-archive-block);
+    padding: 0.95rem;
+    box-shadow: var(--sys-shadow-panel), var(--sys-shadow-inset);
   }
 
   .screen-side-nav-item {
     width: 100%;
-    border: 1px solid var(--sys-border-soft);
+    border: 1px solid var(--sys-border-strong);
     border-radius: var(--sys-radius-control);
     background: var(--sys-bg-field);
-    padding: 0.8rem 0.9rem;
+    padding: 0.75rem 0.85rem;
     font-size: 0.9rem;
     text-align: left;
     color: var(--sys-text-secondary);
@@ -394,7 +527,7 @@
 
   .screen-side-nav-item-active {
     border-color: var(--sys-border-strong);
-    background: var(--sys-bg-elevated);
+    background: var(--sys-bg-active-module);
     color: var(--sys-text-primary);
   }
 }

@@ -30,14 +30,15 @@ export function Panel({
       aria-labelledby={headingId}
       className={cn(
         "overflow-hidden rounded-panel border border-border-strong bg-panel shadow-panel inset-shadow-panel",
+        "before:block before:h-[3px] before:w-full before:bg-service-blue/60",
         className,
       )}
     >
-      <header className="border-b border-border-soft px-4 py-3 md:px-5">
+      <header className="border-b border-border-soft bg-[color-mix(in_srgb,var(--sys-bg-elevated)_26%,transparent)] px-4 py-3 md:px-5">
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-1">
             {eyebrow ? <p className="kicker">{eyebrow}</p> : null}
-            <h2 id={headingId} className="text-lg font-semibold tracking-[0.01em] text-text-primary">
+            <h2 id={headingId} className="text-lg font-semibold tracking-[0.012em] text-text-primary md:text-[1.15rem]">
               {title}
             </h2>
           </div>

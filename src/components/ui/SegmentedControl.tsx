@@ -63,7 +63,10 @@ export function SegmentedControl<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn("inline-flex flex-wrap rounded-control border border-border-strong bg-field p-1 inset-shadow-panel", className)}
+      className={cn(
+        "control-group inline-flex flex-wrap p-1",
+        className,
+      )}
     >
       {options.map((option, index) => {
         const isActive = option.value === value;
@@ -80,17 +83,21 @@ export function SegmentedControl<T extends string>({
             aria-checked={isActive}
             tabIndex={isActive || (selectedIndex === -1 && index === 0) ? 0 : -1}
             className={cn(
-              "rounded-[calc(var(--sys-radius-control)-2px)] px-3 py-2 text-left transition-colors duration-150",
+              "rounded-[calc(var(--sys-radius-control)-2px)] border px-3 py-2 text-left transition-colors duration-150",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-service-blue focus-visible:ring-offset-2 focus-visible:ring-offset-panel",
               isActive
-                ? "bg-elevated text-text-primary shadow-panel"
-                : "text-text-secondary hover:bg-highlight hover:text-text-primary",
+                ? "control-active"
+                : "border-transparent text-text-secondary hover:bg-highlight hover:text-text-primary",
             )}
             onClick={() => onChange(option.value)}
             onKeyDown={(event) => onKeyDown(event, index)}
           >
             <span className="block text-sm font-medium">{option.label}</span>
-            {option.note ? <span className="mt-1 block mono-label text-text-secondary">{option.note}</span> : null}
+            {option.note ? (
+              <span className={cn("mt-1 block mono-label", isActive ? "control-active-meta" : "text-text-secondary")}>
+                {option.note}
+              </span>
+            ) : null}
           </button>
         );
       })}
