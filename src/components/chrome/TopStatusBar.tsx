@@ -11,7 +11,7 @@ type TopStatusBarProps = {
   onModeChange: (mode: ThemeMode) => void;
 };
 
-export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBarProps) {
+export function TopStatusBar({ mode, resolvedTheme: _resolvedTheme, onModeChange }: TopStatusBarProps) {
   const { locale, setLocale, strings } = useLocale();
   const { topBar } = strings;
 
@@ -34,7 +34,7 @@ export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBar
                 <ul className="flex flex-wrap items-center gap-2 text-sm text-text-secondary">
                   {topBar.sectionNavItems.map((item, index) => (
                     <li key={item.href}>
-                      <a className="status-chip" href={item.href}>
+                      <a className="section-nav-chip" href={item.href}>
                         {index < 2 ? (
                           index === 0 ? (
                             <ScrollText className="h-4 w-4" aria-hidden="true" />
@@ -58,26 +58,21 @@ export function TopStatusBar({ mode, resolvedTheme, onModeChange }: TopStatusBar
               ))}
             </dl>
           </div>
-          <div className="grid gap-3 xl:grid-cols-[minmax(17rem,1.02fr)_minmax(18rem,0.98fr)] 2xl:min-w-[39rem]">
+          <div className="grid gap-3 xl:grid-cols-[minmax(14rem,0.92fr)_minmax(16rem,1.08fr)] 2xl:min-w-[33rem]">
             <LocaleToggle
               locale={locale}
               onLocaleChange={setLocale}
               title={topBar.localeToggle.title}
               activeLabel={topBar.localeToggle.activeLabel}
               groupAriaLabel={topBar.localeToggle.groupAriaLabel}
-              rootLangLabel={topBar.localeToggle.rootLangLabel}
-              storageLabel={topBar.localeToggle.storageLabel}
-              storageValue={topBar.localeToggle.storageValue}
               options={topBar.localeToggle.options as Array<{ value: Locale; label: string; fullLabel: string }>}
             />
             <ThemeToggle
               mode={mode}
-              resolvedTheme={resolvedTheme}
               onModeChange={onModeChange}
               title={topBar.themeToggle.title}
               activeLabel={topBar.themeToggle.activeLabel}
               groupAriaLabel={topBar.themeToggle.groupAriaLabel}
-              resolvedThemeLabels={topBar.themeToggle.resolvedThemeLabels}
               options={topBar.themeToggle.options as Array<{ value: ThemeMode; label: string; buttonLabel: string }>}
             />
           </div>

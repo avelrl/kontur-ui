@@ -3,5 +3,6 @@ dist
 coverage
 .DS_Store
 .codex-artifacts
-PLAN.md
+PLAN*.md
 promt*.md
+.npm-cache

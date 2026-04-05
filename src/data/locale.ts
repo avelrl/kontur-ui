@@ -28,9 +28,6 @@ const ruDictionary = {
       title: "Язык интерфейса",
       activeLabel: "Активно",
       groupAriaLabel: "Переключатель языка",
-      rootLangLabel: "HTML lang",
-      storageLabel: "Хранение",
-      storageValue: "localStorage",
       options: [
         { value: "ru", label: "RU", fullLabel: "Русский" },
         { value: "en", label: "EN", fullLabel: "English" },
@@ -40,10 +37,6 @@ const ruDictionary = {
       title: "Режим отображения",
       activeLabel: "Активно",
       groupAriaLabel: "Переключатель темы",
-      resolvedThemeLabels: {
-        light: "светлая",
-        dark: "тёмная",
-      },
       options: [
         { value: "light", label: "Светлая", buttonLabel: "Светлая тема" },
         { value: "dark", label: "Тёмная", buttonLabel: "Тёмная тема" },
@@ -134,6 +127,19 @@ const ruDictionary = {
         meta: "TOKENS / SYSTEM",
         description:
           "Foundations задают не только цвета, но и поведение поверхности: как различаются canvas, panel, elevated и field, как работают рамка, радиус, тень и spacing rhythm, и почему тёмная тема ощущается самостоятельной приборной версией, а не инверсией светлой.",
+        routeTitle: "Маршрут темы",
+        routeItems: [
+          "Semantic tokens определяют материал слоя, а не разовый цвет для конкретного блока.",
+          "@theme inline связывает системные переменные и utility tokens без ручного дублирования по компонентам.",
+          "Компонент собирается из surface role, border logic и spacing rhythm, а не из случайной карточной композиции.",
+          "Light и dark проверяются как две независимые рабочие версии с разным поведением контраста.",
+        ],
+        disciplineTitle: "Системная дисциплина",
+        disciplineItems: [
+          "Сначала функция слоя, потом его визуальный носитель.",
+          "Рамка формирует конструкцию раньше, чем тень добавляет отделение.",
+          "Акцент допустим только там, где он помогает считывать статус, действие или маршрут.",
+        ],
         sideTitle: "Surface hierarchy",
         calibrationTitle: "Калибровка слоёв",
         calibrationItems: [
@@ -975,9 +981,16 @@ const ruDictionary = {
       frame: {
         stableChannel: "Канал устойчив",
         time: "17:40",
-        controlLabel: "Системный ход",
-        dockLabel: "Локальный пост",
+        controlLabel: "Система",
+        dockLabel: "Пост",
       },
+      badgeLabels: {
+        normal: "Наблюдение",
+        service: "Служебный",
+        success: "Штатно",
+        warning: "Проверить",
+        danger: "Сбой",
+      } satisfies Record<StatusTone, string>,
       screens: [
         {
           id: "day-overview",
@@ -1099,6 +1112,27 @@ const ruDictionary = {
           "Next-generation productivity",
         ],
       },
+      reuse: {
+        eyebrow: "Theme reuse",
+        title: "Как подключить тему в другом проекте",
+        meta: "PACKAGE / IMPORTS",
+        description:
+          "Репозиторий теперь собирает отдельный theme entry и Tailwind v4 source layer, которые можно подключать как локальный пакет, workspace dependency или приватную поставку внутри другой кодовой базы.",
+        stepsTitle: "Порядок подключения",
+        steps: [
+          "Собрать проект командой `npm run build`, чтобы получить `dist/theme` с JS, типами и CSS.",
+          "Добавить репозиторий как локальную зависимость или workspace package в другой проект.",
+          "Импортировать `kontur-ui/theme.css` и использовать runtime API из `kontur-ui/theme`.",
+          "Оставлять продуктовые тексты, locale layer и модули своими, переиспользуя только theme tokens и логику переключения.",
+        ],
+        snippetTitle: "Минимальный пример",
+        checklistTitle: "Что переносится без копирования по файлам",
+        checklistItems: [
+          "Семантические CSS tokens, обе версии темы и `@theme inline` mapping для Tailwind v4.",
+          "Theme runtime: `useThemeMode`, `applyThemeMode`, storage keys и root-атрибуты.",
+          "Локализованные тексты и locale runtime остаются на стороне consuming application.",
+        ],
+      },
     },
   },
 };
@@ -1131,9 +1165,6 @@ const enDictionary: LocaleDictionary = {
       title: "Interface language",
       activeLabel: "Active",
       groupAriaLabel: "Language switcher",
-      rootLangLabel: "HTML lang",
-      storageLabel: "Storage",
-      storageValue: "localStorage",
       options: [
         { value: "ru", label: "RU", fullLabel: "Russian" },
         { value: "en", label: "EN", fullLabel: "English" },
@@ -1143,10 +1174,6 @@ const enDictionary: LocaleDictionary = {
       title: "Display mode",
       activeLabel: "Active",
       groupAriaLabel: "Theme switcher",
-      resolvedThemeLabels: {
-        light: "light",
-        dark: "dark",
-      },
       options: [
         { value: "light", label: "Light", buttonLabel: "Light theme" },
         { value: "dark", label: "Dark", buttonLabel: "Dark theme" },
@@ -1237,6 +1264,19 @@ const enDictionary: LocaleDictionary = {
         meta: "TOKENS / SYSTEM",
         description:
           "Foundations defines not only colors but surface behavior: how canvas, panel, elevated, and field differ, how border, radius, shadow, and spacing rhythm operate, and why the dark theme feels like an independent instrument version rather than an inversion of the light one.",
+        routeTitle: "Theme route",
+        routeItems: [
+          "Semantic tokens define layer material rather than a one-off color for a specific block.",
+          "`@theme inline` connects system variables and utility tokens without manual duplication across components.",
+          "A component is assembled from surface role, border logic, and spacing rhythm rather than from random card composition.",
+          "Light and dark are verified as two independent working versions with different contrast behavior.",
+        ],
+        disciplineTitle: "System discipline",
+        disciplineItems: [
+          "Define the layer function first and only then its visual carrier.",
+          "The border establishes structure before the shadow adds separation.",
+          "Accent is allowed only where it helps read a state, action, or route.",
+        ],
         sideTitle: "Surface hierarchy",
         calibrationTitle: "Layer calibration",
         calibrationItems: [
@@ -2078,9 +2118,16 @@ const enDictionary: LocaleDictionary = {
       frame: {
         stableChannel: "Channel stable",
         time: "17:40",
-        controlLabel: "System course",
-        dockLabel: "Local post",
+        controlLabel: "System",
+        dockLabel: "Post",
       },
+      badgeLabels: {
+        normal: "Observe",
+        service: "Service",
+        success: "Nominal",
+        warning: "Review",
+        danger: "Breach",
+      } satisfies Record<StatusTone, string>,
       screens: [
         {
           id: "day-overview",
@@ -2200,6 +2247,27 @@ const enDictionary: LocaleDictionary = {
           "Beautiful experience",
           "Streamline your tasks",
           "Next-generation productivity",
+        ],
+      },
+      reuse: {
+        eyebrow: "Theme reuse",
+        title: "How to connect the theme in another project",
+        meta: "PACKAGE / IMPORTS",
+        description:
+          "The repository now builds a dedicated theme entry and Tailwind v4 source layer that can be consumed as a local package, a workspace dependency, or a private distribution inside another codebase.",
+        stepsTitle: "Integration flow",
+        steps: [
+          "Run `npm run build` to generate `dist/theme` with JS, types, and CSS.",
+          "Add the repository as a local dependency or workspace package in the target project.",
+          "Import `kontur-ui/theme.css` and use the runtime API from `kontur-ui/theme`.",
+          "Keep product copy, the locale layer, and modules project-specific while reusing theme tokens and switching logic.",
+        ],
+        snippetTitle: "Minimal example",
+        checklistTitle: "What transfers without file-by-file copying",
+        checklistItems: [
+          "Semantic CSS tokens, both theme versions, and `@theme inline` mapping for Tailwind v4.",
+          "Theme runtime: `useThemeMode`, `applyThemeMode`, storage keys, and root attributes.",
+          "Localized copy and locale runtime stay inside the consuming application.",
         ],
       },
     },

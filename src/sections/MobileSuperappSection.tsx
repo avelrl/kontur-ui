@@ -6,7 +6,6 @@ import { Panel } from "../components/ui/Panel";
 export function MobileSuperappSection() {
   const {
     strings: {
-      common,
       sections: { mobile },
     },
   } = useLocale();
@@ -35,7 +34,6 @@ export function MobileSuperappSection() {
             eyebrow={screen.subtitle}
             title={screen.title}
             meta={mobile.panelMeta}
-            className="h-full"
             bodyClassName="flex justify-center"
           >
             <div className="phone-frame">
@@ -53,18 +51,21 @@ export function MobileSuperappSection() {
                   <span className="passport-tag">{mobile.frame.controlLabel}</span>
                   <span className="passport-tag">{mobile.frame.dockLabel}</span>
                 </div>
-                <div className="mt-3 space-y-3">
+                <div className="phone-content mt-3">
                   <div className="phone-module phone-module-head">
                     <p className="text-sm font-medium text-text-primary">{screen.title}</p>
                     <p className="mt-2 text-sm leading-6 text-text-secondary">{screen.subtitle}</p>
                   </div>
-                  <div className="space-y-2.5">
+                  <div className="phone-module-list">
                     {screen.modules.map((module) => (
                       <div key={module.id} className="phone-module">
-                        <div className="flex items-center justify-between gap-3">
-                          <p className="mono-label text-text-secondary">{module.label}</p>
-                          <ToneBadge tone={module.tone} className="px-2.5 py-1.5 text-[0.68rem]">
-                            {common.toneLabels[module.tone]}
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <p className="min-w-0 flex-1 mono-label text-text-secondary">{module.label}</p>
+                          <ToneBadge
+                            tone={module.tone}
+                            className="max-w-full shrink-0 px-2.5 py-1.5 text-[0.63rem] leading-[1.05] whitespace-nowrap"
+                          >
+                            {mobile.badgeLabels[module.tone]}
                           </ToneBadge>
                         </div>
                         <p className="mt-2.5 text-base font-semibold text-text-primary">{module.value}</p>

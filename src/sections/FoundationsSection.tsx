@@ -17,7 +17,34 @@ export function FoundationsSection() {
         meta={foundations.intro.meta}
         bodyClassName="grid gap-4 lg:grid-cols-[minmax(0,1.14fr)_minmax(19rem,0.86fr)]"
       >
-        <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{foundations.intro.description}</p>
+        <div className="space-y-4">
+          <p className="text-sm leading-7 text-text-primary md:text-base md:leading-8">{foundations.intro.description}</p>
+          <div className="grid gap-3 xl:grid-cols-[minmax(0,1.03fr)_minmax(19rem,0.97fr)]">
+            <div className="surface-field px-4 py-4">
+              <p className="mono-label text-text-secondary">{foundations.intro.routeTitle}</p>
+              <ol className="mt-4 space-y-3">
+                {foundations.intro.routeItems.map((item, index) => (
+                  <li key={item} className="rounded-control border border-border-soft bg-elevated px-3 py-3 shadow-panel inset-shadow-panel">
+                    <div className="flex items-start gap-3">
+                      <span className="passport-tag mt-0.5 min-w-[3rem] justify-center">{`0${index + 1}`}</span>
+                      <p className="text-sm leading-6 text-text-secondary">{item}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="surface-elevated px-4 py-4">
+              <p className="mono-label text-text-secondary">{foundations.intro.disciplineTitle}</p>
+              <div className="mt-4 space-y-3">
+                {foundations.intro.disciplineItems.map((item) => (
+                  <div key={item} className="rounded-control border border-border-soft bg-field px-3 py-3 shadow-panel inset-shadow-panel">
+                    <p className="text-sm leading-6 text-text-secondary">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="grid gap-3">
           <div className="surface-field px-4 py-4">
             <p className="mono-label text-text-secondary">{foundations.intro.sideTitle}</p>

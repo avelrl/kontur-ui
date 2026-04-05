@@ -122,10 +122,18 @@ export function ComponentLibrarySection() {
             <input className={checkboxClassName} defaultChecked type="checkbox" />
             {components.tabs.forms.notifyArchive}
           </label>
-          <label className="surface-field flex items-center justify-between px-3 py-2.5 text-sm text-text-primary">
+          <label className="surface-field flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-text-primary">
             <span>{components.tabs.forms.keepReserveSync}</span>
-            <span className="inline-flex h-6 w-11 items-center rounded-full border border-border-strong bg-elevated px-1">
-              <span className="h-4 w-4 rounded-full bg-service-blue" />
+            <span className="relative inline-flex h-6 w-11 shrink-0 items-center">
+              <input className="peer sr-only" defaultChecked type="checkbox" />
+              <span
+                aria-hidden="true"
+                className="inline-flex h-6 w-11 items-center rounded-full border border-border-strong bg-elevated px-1 shadow-panel inset-shadow-panel transition-colors duration-150 peer-checked:bg-active-module peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-service-blue peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-panel"
+              />
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1 top-1 h-4 w-4 rounded-full bg-text-muted transition-transform duration-150 peer-checked:translate-x-5 peer-checked:bg-service-blue"
+              />
             </span>
           </label>
         </form>

@@ -69,9 +69,7 @@ describe("theme switcher", () => {
     render(<App />);
 
     expect(document.documentElement.lang).toBe("ru");
-    expect(screen.getByText("RU / EN")).toBeInTheDocument();
-    expect(screen.getByText("HTML lang")).toBeInTheDocument();
-    expect(screen.getByText("localStorage")).toBeInTheDocument();
+    expect(screen.getByText("Русский")).toBeInTheDocument();
 
     const englishButton = screen.getByRole("button", { name: "English" });
     await user.click(englishButton);
@@ -144,6 +142,10 @@ describe("theme switcher", () => {
 
     await user.click(screen.getByRole("tab", { name: /формы/i }));
     expect(screen.getByText("Сопроводительная запись")).toBeInTheDocument();
+    const reserveSync = screen.getByRole("checkbox", { name: /поддерживать резервную синхронизацию/i });
+    expect(reserveSync).toBeChecked();
+    await user.click(reserveSync);
+    expect(reserveSync).not.toBeChecked();
 
     const labelsAccordion = screen.getByRole("button", { name: /индексные подписи/i });
     await user.click(labelsAccordion);

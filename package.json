@@ -3,9 +3,28 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "files": [
+    "dist/theme",
+    "README.md",
+    "README.ru.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./theme": {
+      "types": "./dist/theme/kontur-theme.d.ts",
+      "import": "./dist/theme/kontur-theme.js"
+    },
+    "./theme.css": "./dist/theme/theme.css",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.app.json && vite build",
+    "build": "npm run build:demo && npm run build:theme",
+    "build:demo": "tsc -p tsconfig.app.json && vite build",
+    "build:theme": "npm run build:theme:js && npm run build:theme:types && npm run build:theme:styles",
+    "build:theme:js": "vite build --config vite.theme.config.ts",
+    "build:theme:types": "tsc -p tsconfig.theme.json",
+    "build:theme:styles": "node scripts/copy-theme-css.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

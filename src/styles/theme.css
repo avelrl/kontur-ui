@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root {
+  --sys-bg-canvas: #e7e1d4;
+  --sys-bg-panel: #d3c9ba;
+  --sys-bg-elevated: #f4efe3;
+  --sys-bg-field: #e5dbce;
+  --sys-bg-active-module: color-mix(in srgb, #72849a 24%, #f2ecdf);
+  --sys-bg-archive-block: color-mix(in srgb, #a48a54 14%, #ebe2d4);
+  --sys-border-accent: color-mix(in srgb, #72849a 82%, #2f3438 18%);
+  --sys-active-ink: #243038;
+  --sys-text-primary: #2f3438;
+  --sys-text-secondary: #4f5962;
+  --sys-text-muted: #687067;
+  --sys-border-strong: #6e8096;
+  --sys-border-soft: color-mix(in srgb, #6e8096 42%, #e7e1d4);
+  --sys-border-grid: color-mix(in srgb, #7d8674 34%, #d6cdbc);
+  --sys-signal-amber: #c89a3d;
+  --sys-signal-green: #728b68;
+  --sys-signal-red: #b54834;
+  --sys-service-blue: #72849a;
+  --sys-highlight: color-mix(in srgb, #72849a 14%, #f2ede4);
+  --sys-radius-panel: 8px;
+  --sys-radius-control: 6px;
+  --sys-shadow-panel:
+    0 1px 0 rgb(255 255 255 / 0.52),
+    0 10px 18px rgb(61 68 76 / 0.06);
+  --sys-shadow-inset:
+    inset 0 1px 0 rgb(255 255 255 / 0.5),
+    inset 0 -1px 0 rgb(61 68 76 / 0.15);
+  --sys-font-ui:
+    "IBM Plex Sans",
+    "PT Sans",
+    "Segoe UI",
+    "Noto Sans",
+    sans-serif;
+  --sys-font-mono:
+    "IBM Plex Mono",
+    "JetBrains Mono",
+    "SFMono-Regular",
+    "Consolas",
+    monospace;
+}
+
+[data-theme="dark"] {
+  --sys-bg-canvas: #1c1f22;
+  --sys-bg-panel: #262b2f;
+  --sys-bg-elevated: #2e363c;
+  --sys-bg-field: #20262b;
+  --sys-bg-active-module: color-mix(in srgb, #8a9db4 14%, #2e363c);
+  --sys-bg-archive-block: color-mix(in srgb, #957b47 11%, #24292d);
+  --sys-border-accent: color-mix(in srgb, #8a9db4 78%, #d8d0c4 22%);
+  --sys-active-ink: #ece4d8;
+  --sys-text-primary: #e3dbcf;
+  --sys-text-secondary: #c2b9ad;
+  --sys-text-muted: #8d938e;
+  --sys-border-strong: #5a6671;
+  --sys-border-soft: #3b434b;
+  --sys-border-grid: color-mix(in srgb, #72849a 18%, #1c1f22);
+  --sys-signal-amber: #d2a54f;
+  --sys-signal-green: #809a76;
+  --sys-signal-red: #c45d49;
+  --sys-service-blue: #8a9db4;
+  --sys-highlight: color-mix(in srgb, #8a9db4 10%, #30373d);
+  --sys-shadow-panel:
+    0 1px 0 rgb(255 255 255 / 0.05),
+    0 16px 32px rgb(0 0 0 / 0.28);
+  --sys-shadow-inset:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    inset 0 -1px 0 rgb(0 0 0 / 0.24);
+}
+
+@theme inline {
+  --color-canvas: var(--sys-bg-canvas);
+  --color-panel: var(--sys-bg-panel);
+  --color-elevated: var(--sys-bg-elevated);
+  --color-field: var(--sys-bg-field);
+  --color-active-module: var(--sys-bg-active-module);
+  --color-archive-block: var(--sys-bg-archive-block);
+  --color-text-primary: var(--sys-text-primary);
+  --color-text-secondary: var(--sys-text-secondary);
+  --color-text-muted: var(--sys-text-muted);
+  --color-border-strong: var(--sys-border-strong);
+  --color-border-accent: var(--sys-border-accent);
+  --color-border-soft: var(--sys-border-soft);
+  --color-border-grid: var(--sys-border-grid);
+  --color-signal-amber: var(--sys-signal-amber);
+  --color-signal-green: var(--sys-signal-green);
+  --color-signal-red: var(--sys-signal-red);
+  --color-service-blue: var(--sys-service-blue);
+  --color-highlight: var(--sys-highlight);
+  --radius-panel: var(--sys-radius-panel);
+  --radius-control: var(--sys-radius-control);
+  --shadow-panel: var(--sys-shadow-panel);
+  --inset-shadow-panel: var(--sys-shadow-inset);
+  --font-ui: var(--sys-font-ui);
+  --font-mono: var(--sys-font-mono);
+}

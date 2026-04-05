@@ -37,11 +37,11 @@ Many examples of internal tooling drift toward the same few aesthetics:
 
 ## What It Does Not Solve
 
-- It is not a production-ready design system package.
+- It is not a full productized design system package with stable component APIs.
 - It is not a universal component library for arbitrary product styles.
 - It is not an application with real backend workflows or domain logic.
 - It is not a UI kit for landing pages, marketing sites, or consumer mobile apps.
-- It is not published as a versioned npm package and does not promise API stability.
+- It is not a public npm package and does not promise API stability beyond the exported theme entry.
 
 ## Who Should Use It
 
@@ -68,9 +68,28 @@ npm run build
 ## How To Use It
 
 - Open the demo and inspect the sections as a reference implementation.
-- Reuse semantic tokens from [`src/styles/app.css`](./src/styles/app.css).
+- Reuse semantic tokens from [`src/styles/theme.css`](./src/styles/theme.css).
 - Reuse structural patterns from [`src/components/`](./src/components) and [`src/sections/`](./src/sections).
 - Adapt the copy, tokens, and modules to your own product while preserving the semantic layer.
+
+## Reusing The Theme In Another Project
+
+After `npm run build`, the repository writes a reusable theme layer into `dist/theme/`.
+The exported `theme.css` is a Tailwind CSS v4 source layer for internal or workspace consumers, not a compiled standalone stylesheet.
+
+Usage:
+
+```tsx
+import "kontur-ui/theme.css";
+import { useThemeMode } from "kontur-ui/theme";
+```
+
+What gets reused:
+
+- `theme.css` with semantic tokens, both theme variants, and Tailwind v4 token mapping
+- `kontur-theme.js` with runtime helpers
+- `kontur-theme.d.ts` with TypeScript types
+- Product copy and locale runtime stay in the consuming application
 
 ## Repository Structure
 
@@ -83,7 +102,7 @@ npm run build
 │   ├── data/
 │   ├── lib/
 │   ├── sections/
-│   └── styles/app.css
+│   └── styles/
 └── README.md
 ```
 
@@ -91,19 +110,20 @@ npm run build
 
 ### Semantic tokens
 
-Theme tokens live in [`src/styles/app.css`](./src/styles/app.css):
+Reusable theme tokens live in [`src/styles/theme.css`](./src/styles/theme.css):
 
 - `:root` contains light-theme semantic variables
 - `[data-theme="dark"]` contains dark-theme overrides
 - `@theme inline` maps `--sys-*` variables to Tailwind v4 utility tokens
 
 Components use semantic classes such as `bg-panel`, `text-text-primary`, and `border-border-strong` instead of raw hex values.
+The demo-specific layout and chrome styles stay in [`src/styles/app.css`](./src/styles/app.css), which imports the theme source layer.
 
 ### Runtime logic
 
 - [`src/lib/theme.ts`](./src/lib/theme.ts) handles theme mode, storage, system preference, and root attributes.
-- [`src/lib/locale.tsx`](./src/lib/locale.tsx) handles locale state, persistence, and `html[lang]`.
-- [`src/data/locale.ts`](./src/data/locale.ts) stores localized UI copy for `ru` and `en`.
+- [`src/lib/locale.tsx`](./src/lib/locale.tsx) handles locale state, persistence, and `html[lang]` for the demo only.
+- [`src/data/locale.ts`](./src/data/locale.ts) stores localized UI copy for the demo in `ru` and `en`.
 
 ### Visual grammar
 
@@ -115,7 +135,7 @@ Components use semantic classes such as `bg-panel`, `text-text-primary`, and `bo
 
 When adding a new module:
 
-1. Add or adjust semantic tokens in [`src/styles/app.css`](./src/styles/app.css).
+1. Add or adjust semantic tokens in [`src/styles/theme.css`](./src/styles/theme.css).
 2. Map new tokens in `@theme inline` only when a Tailwind utility token is actually needed.
 3. Build the module from semantic surfaces, borders, labels, and spacing rhythm.
 4. Verify light and dark as two independent versions of one system.
