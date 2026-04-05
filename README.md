@@ -6,6 +6,8 @@
 
 It presents a complete interface language for dense operational products: registries, logs, document-like blocks, section grammar, state markers, and carefully separated light and dark surfaces. The goal is not to ship a neutral dashboard kit. The goal is to document a specific visual system and show how it can be implemented in code.
 
+Live demo: [avelrl.github.io/kontur-ui](https://avelrl.github.io/kontur-ui/)
+
 ![Kontur UI overview](./docs/readme-overview.png)
 
 ## What This Repository Is
